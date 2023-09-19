@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+	box-sizing: border-box;
+}
+:root {
+	--purple: #8b6ce0;
+	--blue: #bae8e8;
+	--light-blue: #e3f6f5;
+	--yellow: #ffd803;
+}
+
+nav {
+	/* border: 5px solid red; */
+}
+footer {
+	/* border: 5px solid red; */
+}
+.home {
+	/* border: 5px solid pink; */
+}
+
+main {
+	/* border: 5px solid blue; */
+}
+/* main > div {
+	width: clamp(500px, 75%, 1000px);
+	height: 100vh;
+} */
+
+.top__row {
+	/* border: 5px solid red; */
+}
+.bottom__row {
+	/* border: 5px solid red; */
+}
+
+.square {
+	display: block;
+	width: 100px;
+	height: 100px;
+	border: 1px solid orange;
+}
+.left-col,
+.right-col {
+	/* border: 5px solid orange; */
+}
+
+.color__container {
+	/* border: 1px solid orange; */
+}
+.icon__container {
+	/* border: 5px solid green; */
+}
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
