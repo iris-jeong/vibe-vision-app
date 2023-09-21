@@ -56,6 +56,7 @@ export default function Icon({
 				{toolTip[type]}
 			</div>
 			<Image
+				className={`${type}-icon`}
 				src={srcPath}
 				alt={`${type.charAt(0).toUpperCase() + type.slice(1)} Icon`}
 				width={24}
@@ -63,7 +64,11 @@ export default function Icon({
 				onClick={onClick}
 			/>
 			{type === "palette" && (
-				<div>
+				<div
+					className={`.color-picker ${
+						paletteStatus ? "visible" : "invisible"
+					}`}
+				>
 					<SketchPicker
 						className={`absolute z-10 -left-10 top-6 ${
 							paletteStatus ? "visible" : "invisible"

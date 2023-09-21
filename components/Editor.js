@@ -30,7 +30,7 @@ export default function Editor({
 		}
 	};
 	return (
-		<>
+		<div className="editor">
 			{["lock", "copy", "palette"].map((iconType) => {
 				return (
 					<Icon
@@ -47,7 +47,7 @@ export default function Editor({
 					/>
 				);
 			})}
-		</>
+		</div>
 	);
 }
 function copyToClipboard(hexValue) {

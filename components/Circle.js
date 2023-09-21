@@ -29,7 +29,11 @@ export default function Circle({
 			onMouseEnter={() => toggleShowEditor(true)}
 			onMouseLeave={() => toggleShowEditor(false)}
 		>
-			<div className={showEditor ? "block" : "hidden"}>
+			<div
+				className={`editor-container ${
+					showEditor ? "block" : "hidden"
+				}`}
+			>
 				<Editor
 					hoveredIcon={hoveredIcon}
 					setHoveredIcon={setHoveredIcon}
