@@ -2,24 +2,27 @@ import Icon from "./Icon";
 import { useState } from "react";
 
 export default function Editor({
-	sketchPickerRef,
 	hoveredIcon,
 	setHoveredIcon,
 	color,
 	setColor,
 	paletteStatus,
 	togglePaletteStatus,
+	setShowNotification,
 }) {
 	const [isLocked, setIsLocked] = useState(false);
 
-	const handleIconClick = (type, event) => {
-		event?.stopPropagation();
+	const handleIconClick = (type) => {
 		switch (type) {
 			case "lock":
 				setIsLocked(!isLocked);
 				break;
 			case "copy":
 				copyToClipboard(color);
+				setShowNotification(true);
+				setTimeout(() => {
+					setShowNotification(false);
+				}, 2000);
 				break;
 			case "palette":
 				togglePaletteStatus(!paletteStatus);
@@ -37,7 +40,6 @@ export default function Editor({
 						onMouseEnter={() => setHoveredIcon(iconType)}
 						onMouseLeave={() => setHoveredIcon(null)}
 						onClick={(event) => handleIconClick(iconType, event)}
-						sketchPickerRef={sketchPickerRef}
 						color={color}
 						setColor={setColor}
 						paletteStatus={paletteStatus}

@@ -7,7 +7,6 @@ export default function Icon({
 	onMouseEnter,
 	onMouseLeave,
 	onClick,
-	sketchPickerRef,
 	color,
 	setColor,
 	paletteStatus,
@@ -18,7 +17,11 @@ export default function Icon({
 		copy: "copy",
 		palette: "color-palette",
 	};
-
+	const toolTip = {
+		lock: "Toggle lock",
+		copy: "Copy HEX",
+		palette: "Select color",
+	};
 	const srcPath =
 		hoveredIcon === type
 			? `icons/${icons[type]}-hover.svg`
@@ -29,7 +32,7 @@ export default function Icon({
 			case "lock":
 				return "-left-1 -top-1 md:-top-2";
 			case "copy":
-				return "-top-5 right-9 md:-top-6 md:right-[2.8rem]";
+				return "-top-5 right-[38px] md:-top-6 md:right-[2.8rem]";
 			case "palette":
 				return "-right-1 -top-1 md:-top-2";
 			default:
@@ -45,6 +48,13 @@ export default function Icon({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 		>
+			<div
+				className={`tooltip z-20 rounded-full p-2 bg-slate-800 text-white flex justify-center text-center text-xs absolute inline-block w-24 -top-[36px] -left-[34px] ${
+					hoveredIcon === type ? "visible" : "hidden"
+				}`}
+			>
+				{toolTip[type]}
+			</div>
 			<Image
 				src={srcPath}
 				alt={`${type.charAt(0).toUpperCase() + type.slice(1)} Icon`}
@@ -53,7 +63,7 @@ export default function Icon({
 				onClick={onClick}
 			/>
 			{type === "palette" && (
-				<div ref={sketchPickerRef}>
+				<div>
 					<SketchPicker
 						className={`absolute z-10 -left-10 top-6 ${
 							paletteStatus ? "visible" : "invisible"
