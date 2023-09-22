@@ -8,7 +8,8 @@ export default function Editor({
 	setColor,
 	isPaletteOpen,
 	setIsPaletteOpen,
-	setShowNotification,
+	setIsNotificationShown,
+	setNotification,
 	showEditor,
 	setShowEditor,
 }) {
@@ -26,12 +27,23 @@ export default function Editor({
 					!lockIconRef.current?.contains(event.target)) //Clicked on either copy or palette icon.
 			) {
 				return;
+			} else if (lockIconRef.current?.contains(event.target)) {
+				//Click inside lock icon.
+				setIsPaletteOpen(false);
 			} else {
 				// Close the color palette and editor.
 				setIsPaletteOpen(false);
 				setShowEditor(false);
 			}
 		}
+	};
+
+	const displayNotification = (type) => {
+		setIsNotificationShown(true);
+		setNotification(type);
+		setTimeout(() => {
+			setIsNotificationShown(false);
+		}, 2000);
 	};
 
 	useEffect(() => {
@@ -46,13 +58,11 @@ export default function Editor({
 		switch (type) {
 			case "lock":
 				setIsLocked(!isLocked);
+				displayNotification("lock");
 				break;
 			case "copy":
 				copyToClipboard(color);
-				setShowNotification(true);
-				setTimeout(() => {
-					setShowNotification(false);
-				}, 2000);
+				displayNotification("copy");
 				break;
 			case "palette":
 				console.log(

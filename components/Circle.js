@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import chroma from "chroma-js";
 import Editor from "./Editor";
 
@@ -7,7 +7,8 @@ export default function Circle({
 	color: initalColor = "#8b6ce0",
 	isPaletteOpen,
 	setIsPaletteOpen,
-	setShowNotification,
+	setIsNotificationShown,
+	setNotification,
 }) {
 	const [color, setColor] = useState(initalColor);
 	const [showEditor, setShowEditor] = useState(false);
@@ -43,9 +44,10 @@ export default function Circle({
 					setColor={setColor}
 					isPaletteOpen={isPaletteOpen}
 					setIsPaletteOpen={setIsPaletteOpen}
-					setShowNotification={setShowNotification}
+					setIsNotificationShown={setIsNotificationShown}
 					showEditor={showEditor}
 					setShowEditor={setShowEditor}
+					setNotification={setNotification}
 				/>
 			</div>
 			<div
