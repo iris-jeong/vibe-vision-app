@@ -12,10 +12,6 @@ export default function Home() {
 		setColors(["#8b6ce0", "#e3f6f5", "#bAe8e8", "#ffd803", "#faebd7"]);
 	}, []);
 
-	const handlePaletteToggle = (status) => {
-		setIsPaletteOpen(status);
-	};
-
 	return (
 		<>
 			<div
@@ -38,8 +34,8 @@ export default function Home() {
 							<Circle
 								key={color}
 								color={color}
-								paletteStatus={isPaletteOpen}
-								togglePaletteStatus={handlePaletteToggle}
+								isPaletteOpen={isPaletteOpen}
+								setIsPaletteOpen={setIsPaletteOpen}
 								setShowNotification={setShowNotification}
 							/>
 						);

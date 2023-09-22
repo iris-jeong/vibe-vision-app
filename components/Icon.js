@@ -9,8 +9,10 @@ export default function Icon({
 	onClick,
 	color,
 	setColor,
-	paletteStatus,
+	isPaletteOpen,
 	isLocked,
+	sketchPickerRef,
+	lockIconRef,
 }) {
 	const icons = {
 		lock: isLocked ? "locked" : "unlocked",
@@ -50,28 +52,33 @@ export default function Icon({
 		>
 			<div
 				className={`tooltip z-20 rounded-full p-2 bg-slate-800 text-white flex justify-center text-center text-xs absolute inline-block w-24 -top-[36px] -left-[34px] ${
-					hoveredIcon === type ? "visible" : "hidden"
+					hoveredIcon === type ? "visible " : "hidden"
 				}`}
 			>
 				{toolTip[type]}
 			</div>
-			<Image
-				className={`${type}-icon`}
-				src={srcPath}
-				alt={`${type.charAt(0).toUpperCase() + type.slice(1)} Icon`}
-				width={24}
-				height={24}
-				onClick={onClick}
-			/>
+			<span ref={type === "lock" ? lockIconRef : null}>
+				<Image
+					className={`${type}-icon`}
+					src={srcPath}
+					alt={`${type.charAt(0).toUpperCase() + type.slice(1)} Icon`}
+					width={24}
+					height={24}
+					onClick={onClick}
+				/>
+			</span>
 			{type === "palette" && (
 				<div
+					ref={sketchPickerRef}
 					className={`.color-picker ${
-						paletteStatus ? "visible" : "invisible"
+						isPaletteOpen ? "visible" : "invisible"
 					}`}
 				>
 					<SketchPicker
-						className={`absolute z-10 -left-10 top-6 ${
-							paletteStatus ? "visible" : "invisible"
+						className={`absolute ease-in-out z-10 -left-10 top-6 ${
+							isPaletteOpen
+								? "transition duration-150 opacity-1 ease-in-out"
+								: "transition duration-150 opacity-0 ease-in-out"
 						}`}
 						color={color}
 						onChange={(color) => {

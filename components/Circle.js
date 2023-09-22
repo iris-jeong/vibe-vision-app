@@ -5,8 +5,8 @@ import Editor from "./Editor";
 
 export default function Circle({
 	color: initalColor = "#8b6ce0",
-	paletteStatus,
-	togglePaletteStatus,
+	isPaletteOpen,
+	setIsPaletteOpen,
 	setShowNotification,
 }) {
 	const [color, setColor] = useState(initalColor);
@@ -17,8 +17,8 @@ export default function Circle({
 	const darkerColor = chroma(color).darken(1).hex();
 
 	const toggleShowEditor = (status) => {
-		//Don't toggle the editor if the color picker is open.
-		if (paletteStatus === false) {
+		//Don't toggle the other editors' visibility if a color picker is open.
+		if (isPaletteOpen === false) {
 			setShowEditor(status);
 		}
 	};
@@ -31,7 +31,9 @@ export default function Circle({
 		>
 			<div
 				className={`editor-container ${
-					showEditor ? "block" : "hidden"
+					showEditor
+						? "block transition duration-150 opacity-1  ease-in-out"
+						: "hidden transition duration-150 opacity-0 ease-in-out"
 				}`}
 			>
 				<Editor
@@ -39,9 +41,11 @@ export default function Circle({
 					setHoveredIcon={setHoveredIcon}
 					color={color}
 					setColor={setColor}
-					paletteStatus={paletteStatus}
-					togglePaletteStatus={togglePaletteStatus}
+					isPaletteOpen={isPaletteOpen}
+					setIsPaletteOpen={setIsPaletteOpen}
 					setShowNotification={setShowNotification}
+					showEditor={showEditor}
+					setShowEditor={setShowEditor}
 				/>
 			</div>
 			<div

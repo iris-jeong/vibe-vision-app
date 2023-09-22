@@ -1,18 +1,48 @@
 import Icon from "./Icon";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Editor({
 	hoveredIcon,
 	setHoveredIcon,
 	color,
 	setColor,
-	paletteStatus,
-	togglePaletteStatus,
+	isPaletteOpen,
+	setIsPaletteOpen,
 	setShowNotification,
+	showEditor,
+	setShowEditor,
 }) {
 	const [isLocked, setIsLocked] = useState(false);
+	const sketchPickerRef = useRef(null);
+	const editorRef = useRef(null);
+	const lockIconRef = useRef(null);
 
-	const handleIconClick = (type) => {
+	const handleOutsideClick = (event) => {
+		if (showEditor) {
+			//If the user clicked inside of the color palette, do nothing.
+			if (
+				sketchPickerRef.current?.contains(event.target) || //Clicked inside the sketch picker.
+				(editorRef.current?.contains(event.target) &&
+					!lockIconRef.current?.contains(event.target)) //Clicked on either copy or palette icon.
+			) {
+				return;
+			} else {
+				// Close the color palette and editor.
+				setIsPaletteOpen(false);
+				setShowEditor(false);
+			}
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleOutsideClick);
+		return () => {
+			document.removeEventListener("mousedown", handleOutsideClick);
+		};
+	}, [showEditor]);
+
+	const handleIconClick = (type, event) => {
+		event?.stopPropagation();
 		switch (type) {
 			case "lock":
 				setIsLocked(!isLocked);
@@ -25,12 +55,17 @@ export default function Editor({
 				}, 2000);
 				break;
 			case "palette":
-				togglePaletteStatus(!paletteStatus);
+				console.log(
+					`Palette icon clicked. Setting isPaletteOpen to: ${!isPaletteOpen}`
+				);
+
+				setIsPaletteOpen(!isPaletteOpen);
 				break;
 		}
 	};
+
 	return (
-		<div className="editor">
+		<div ref={editorRef} className="editor ease-in-out">
 			{["lock", "copy", "palette"].map((iconType) => {
 				return (
 					<Icon
@@ -42,8 +77,10 @@ export default function Editor({
 						onClick={(event) => handleIconClick(iconType, event)}
 						color={color}
 						setColor={setColor}
-						paletteStatus={paletteStatus}
+						isPaletteOpen={isPaletteOpen}
 						isLocked={isLocked}
+						sketchPickerRef={sketchPickerRef}
+						lockIconRef={lockIconRef}
 					/>
 				);
 			})}
