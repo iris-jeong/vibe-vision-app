@@ -9,8 +9,11 @@
 	--blue: #bae8e8;
 	--light-blue: #e3f6f5;
 	--yellow: #ffd803;
+	--cream: #faebd7;
 }
-
+body {
+	background-color: var(--cream);
+}
 nav {
 	/* border: 5px solid red; */
 }
@@ -59,7 +62,25 @@ main {
 .notification {
 	background-color: #2c9d30;
 }
-
+.red__container {
+	/* border: 3px solid red; */
+}
+.orange__container {
+	/* border: 3px solid orange; */
+}
+.left-col,
+.right-col,
+.buttons__container {
+	/* border: 3px solid yellow; */
+}
+.green__container {
+	/* border: 3px solid green; */
+}
+.blue__container {
+	/* border: 3px solid blue; */
+}
+.icons__container {
+}
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

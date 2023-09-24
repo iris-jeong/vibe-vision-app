@@ -32,11 +32,11 @@ export default function Icon({
 	const getIconPosition = (type) => {
 		switch (type) {
 			case "lock":
-				return "-left-1 -top-1 md:-top-2";
+				return "-left-1 -top-2 md:-top-3";
 			case "copy":
-				return "-top-5 right-[38px] md:-top-6 md:right-[2.8rem]";
+				return "-top-6 right-[33px] sm:right-[2.4rem] md:-top-7 md:right-[2.7rem]";
 			case "palette":
-				return "-right-1 -top-1 md:-top-2";
+				return "-right-1 -top-2 md:-top-3";
 			default:
 				return "";
 		}
@@ -62,8 +62,8 @@ export default function Icon({
 					className={`${type}-icon`}
 					src={srcPath}
 					alt={`${type.charAt(0).toUpperCase() + type.slice(1)} Icon`}
-					width={24}
-					height={24}
+					width={26}
+					height={26}
 					onClick={onClick}
 				/>
 			</span>

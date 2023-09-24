@@ -51,7 +51,7 @@ export default function Circle({
 				/>
 			</div>
 			<div
-				className="rounded-full w-5/6 h-5/6 flex justify-center items-center"
+				className="shadow-[0_1px_10px_-2px_rgba(0,0,0,0.5)] rounded-full w-[80px] h-[80px] sm:w-5/6 sm:h-5/6 md:w-[11vw] md:h-[11vw] max-w-[105px] max-h-[105px] flex justify-center items-center"
 				style={{
 					backgroundColor: color,
 					border: `5px solid ${hexToRgba(darkerColor, 0.1)}`,
