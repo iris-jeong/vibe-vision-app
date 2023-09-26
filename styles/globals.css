@@ -69,6 +69,9 @@ main {
 .orange__container {
 	/* border: 3px solid orange; */
 }
+.yellow__container {
+	/* border: 3px solid yellow; */
+}
 .left-col,
 .right-col,
 .buttons__container {
