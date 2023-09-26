@@ -10,6 +10,7 @@
 	--light-blue: #e3f6f5;
 	--yellow: #ffd803;
 	--cream: #faebd7;
+	--light-gray: #f6f6f6;
 }
 body {
 	background-color: var(--cream);

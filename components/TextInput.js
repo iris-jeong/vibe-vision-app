@@ -7,7 +7,7 @@ export default function TextInput({ isHeader, defaultValue }) {
 	const initialStyle = {
 		fontSize: isHeader ? "43px" : "16px",
 		fontWeight: isHeader ? "600" : "400",
-		lineHeight: isHeader ? "1.2" : "1.5",
+		lineHeight: isHeader ? "1.1" : "1.5",
 	};
 
 	const autoResize = () => {
@@ -32,7 +32,7 @@ export default function TextInput({ isHeader, defaultValue }) {
 	return (
 		<div
 			ref={textAreaContainerRef}
-			className={`green__container textContainer h-[10rem] w-full px-8 my-1 mb-3`}
+			className={`green__container textContainer w-full my-1`}
 		>
 			<textarea
 				ref={textAreaRef}

@@ -1,14 +1,11 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function TextEditor({
-	font,
-	setIsNotificationShown,
-	setNotification,
-}) {
+export default function TextEditor({ font }) {
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
 	const [isLocked, setIsLocked] = useState(false);
+	const [isFontHovered, setIsFontHovered] = useState(false);
 
 	const icons = {
 		lock: isLocked ? "locked" : "unlocked",
@@ -29,12 +26,16 @@ export default function TextEditor({
 			onMouseEnter={() => toggleEditorVisibility(true)}
 			onMouseLeave={() => toggleEditorVisibility(false)}
 		>
-			<div className="blue__container text-sm w-fit pl-10 pr-3">
+			<div
+				className="blue__container text-sm w-fit"
+				onMouseEnter={() => setIsFontHovered(true)}
+				onMouseLeave={() => setIsFontHovered(false)}
+			>
 				{font}
 			</div>
 			<div
-				className={`flex ${
-					editorIsHovered ? "opacity-100" : "opacity-0"
+				className={`blue__container flex ${
+					editorIsHovered ? "opacity-100 ml-2" : "opacity-0"
 				}`}
 			>
 				<span className="px-1 md:px-2 cursor-pointer">
@@ -52,7 +53,7 @@ export default function TextEditor({
 						onClick={toggleLockIcon}
 					/>
 				</span>
-				<span className="mx-1 d:px-2 cursor-pointer">
+				<span className="relative mx-1 d:px-2 cursor-pointer">
 					<Image
 						src={
 							hoveredIcon === "font"

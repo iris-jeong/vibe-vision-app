@@ -11,7 +11,7 @@ export default function Text({
 	setNotification,
 }) {
 	return (
-		<div className="yellow__container flex-grow w-full">
+		<div className="yellow__container flex-grow w-full mb-0">
 			<TextEditor
 				font={font}
 				setIsNotificationShown={setIsNotificationShown}
