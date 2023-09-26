@@ -64,11 +64,15 @@ export default function Home() {
 							isHeader={true}
 							font="Montserrat"
 							defaultValue="Curated colors and paired fonts in context."
+							setIsNotificationShown={setIsNotificationShown}
+							setNotification={setNotification}
 						/>
 						<Text
 							isHeader={false}
 							font="Arial"
 							defaultValue="Ever scratched your head trying to pick the perfect colors and fonts for your project? Vibe vision generates combinations for you and updates the site in real-time to show you what it would look like in the real world. Get help generating your color palette and font pairing by chatting with the AI who can help you find what you’re looking for. P.S. All the text in this section is editable so feel free to put your own copy in here."
+							setIsNotificationShown={setIsNotificationShown}
+							setNotification={setNotification}
 						/>
 					</div>
 					<div className="orange__container w-full mb-8 1028px:w-1/2 flex order-1 1028px:order-2">

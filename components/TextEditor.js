@@ -1,12 +1,26 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function TextEditor({ font }) {
+export default function TextEditor({
+	font,
+	setIsNotificationShown,
+	setNotification,
+}) {
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
+	const [isLocked, setIsLocked] = useState(false);
+
+	const icons = {
+		lock: isLocked ? "locked" : "unlocked",
+		font: "capital-a",
+	};
 
 	const toggleEditorVisibility = (status) => {
 		setEditorIsHovered(status);
+	};
+
+	const toggleLockIcon = () => {
+		setIsLocked((prevState) => !prevState);
 	};
 
 	return (
@@ -27,14 +41,15 @@ export default function TextEditor({ font }) {
 					<Image
 						src={
 							hoveredIcon === "lock"
-								? "icons/unlocked-hover.svg"
-								: "icons/unlocked.svg"
+								? `icons/${icons["lock"]}-hover.svg`
+								: `icons/${icons["lock"]}.svg`
 						}
 						alt="Lock icon"
 						width={24}
 						height={24}
 						onMouseEnter={() => setHoveredIcon("lock")}
 						onMouseLeave={() => setHoveredIcon(null)}
+						onClick={toggleLockIcon}
 					/>
 				</span>
 				<span className="mx-1 d:px-2 cursor-pointer">
