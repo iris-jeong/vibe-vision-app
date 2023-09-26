@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import chroma from "chroma-js";
-import Editor from "./Editor";
+import CircleEditor from "./CircleEditor";
 
 export default function Circle({
 	color: initalColor = "#8b6ce0",
@@ -26,7 +26,7 @@ export default function Circle({
 
 	return (
 		<div
-			className="color__container flex justify-center items-center relative w-28 h-24 md:h-28 max-w-32"
+			className="color__container flex justify-center items-center relative pt-2 w-28 h-32 md:h-30 max-w-32"
 			onMouseEnter={() => toggleShowEditor(true)}
 			onMouseLeave={() => toggleShowEditor(false)}
 		>
@@ -37,7 +37,7 @@ export default function Circle({
 						: "hidden transition duration-150 opacity-0 ease-in-out"
 				}`}
 			>
-				<Editor
+				<CircleEditor
 					hoveredIcon={hoveredIcon}
 					setHoveredIcon={setHoveredIcon}
 					color={color}
@@ -51,7 +51,7 @@ export default function Circle({
 				/>
 			</div>
 			<div
-				className="shadow-[0_1px_10px_-2px_rgba(0,0,0,0.5)] rounded-full w-[80px] h-[80px] sm:w-5/6 sm:h-5/6 md:w-[11vw] md:h-[11vw] max-w-[105px] max-h-[105px] flex justify-center items-center"
+				className="shadow-[0_1px_10px_-2px_rgba(0,0,0,0.5)] rounded-full w-[80px] h-[80px] sm:w-5/6 sm:h-4/6 md:w-[11vw] md:h-[11vw] max-w-[100px] max-h-[100px] flex justify-center items-center"
 				style={{
 					backgroundColor: color,
 					border: `5px solid ${hexToRgba(darkerColor, 0.1)}`,

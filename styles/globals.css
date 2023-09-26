@@ -13,6 +13,7 @@
 }
 body {
 	background-color: var(--cream);
+	width: 100%;
 }
 nav {
 	/* border: 5px solid red; */

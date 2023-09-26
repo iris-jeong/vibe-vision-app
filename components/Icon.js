@@ -32,11 +32,11 @@ export default function Icon({
 	const getIconPosition = (type) => {
 		switch (type) {
 			case "lock":
-				return "-left-1 -top-2 md:-top-3";
+				return "-left-1 top-1 md:top-0";
 			case "copy":
-				return "-top-6 right-[33px] sm:right-[2.4rem] md:-top-7 md:right-[2.7rem]";
+				return "-top-2 right-[33px] sm:right-[2.4rem] md:-top-4 md:right-[2.7rem]";
 			case "palette":
-				return "-right-1 -top-2 md:-top-3";
+				return "-right-1 top-1 md:top-0";
 			default:
 				return "";
 		}

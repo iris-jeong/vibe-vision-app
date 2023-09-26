@@ -25,8 +25,6 @@ export default function Home() {
 		autoResize(textArea, textAreaContainer);
 	};
 	const autoResize = (textarea, textAreaContainer) => {
-		console.log("Resizing text area.");
-
 		// Reset the height to 'auto' before calculating the scrollHeight
 		textarea.style.height = "auto";
 		textarea.style.height = textarea.scrollHeight + "px";
@@ -56,8 +54,8 @@ export default function Home() {
 			<div
 				className={`bg-[#00BB51] flex absolute py-4 px-6 rounded text-white ease-in-out duration-300 ${
 					isNotificationShown
-						? "top-8 right-8"
-						: "top-8 -right-[500px]"
+						? "animate-slide-in-right top-8 right-8 opacity-100"
+						: "animate-slide-out-right top-8 -right-[500px] opacity-0"
 				}`}
 			>
 				<Image
