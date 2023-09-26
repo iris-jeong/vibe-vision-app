@@ -1,7 +1,7 @@
 import Icon from "./Icon";
 import { useState, useRef, useEffect } from "react";
 
-export default function Editor({
+export default function CircleEditor({
 	hoveredIcon,
 	setHoveredIcon,
 	color,
