@@ -39,13 +39,6 @@ main {
 .bottom__row {
 	/* border: 5px solid red; */
 }
-
-.square {
-	display: block;
-	width: 100px;
-	height: 100px;
-	border: 1px solid orange;
-}
 .left-col,
 .right-col {
 	/* border: 5px solid orange; */
