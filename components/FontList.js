@@ -1,9 +1,14 @@
+import React, { useContext } from "react";
+import { AppContext } from "@components/AppContext";
 import Image from "next/image";
 
-export default function FontList({ isFontListShown, setIsFontListShown }) {
+export default function FontList() {
+	const { isFontListShown, setIsFontListShown } = useContext(AppContext);
+
 	const closeFontList = () => {
 		setIsFontListShown(false);
 	};
+
 	return (
 		<div
 			className={`${

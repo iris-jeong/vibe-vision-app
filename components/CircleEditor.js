@@ -1,18 +1,22 @@
+import { useState, useRef, useEffect, useContext } from "react";
+import { AppContext } from "@components/AppContext";
 import Icon from "./Icon";
-import { useState, useRef, useEffect } from "react";
 
 export default function CircleEditor({
 	hoveredIcon,
 	setHoveredIcon,
 	color,
 	setColor,
-	isPaletteOpen,
-	setIsPaletteOpen,
-	setIsNotificationShown,
-	setNotification,
 	showEditor,
 	setShowEditor,
 }) {
+	const {
+		isPaletteOpen,
+		setIsPaletteOpen,
+		setIsNotificationShown,
+		setNotification,
+	} = useContext(AppContext);
+
 	const [isLocked, setIsLocked] = useState(false);
 	const sketchPickerRef = useRef(null);
 	const editorRef = useRef(null);
@@ -87,7 +91,6 @@ export default function CircleEditor({
 						onClick={(event) => handleIconClick(iconType, event)}
 						color={color}
 						setColor={setColor}
-						isPaletteOpen={isPaletteOpen}
 						isLocked={isLocked}
 						sketchPickerRef={sketchPickerRef}
 						lockIconRef={lockIconRef}

@@ -1,5 +1,7 @@
-import Image from "next/image";
+import React, { useContext } from "react";
+import { AppContext } from "@components/AppContext";
 import { SketchPicker } from "react-color";
+import Image from "next/image";
 
 export default function Icon({
 	type,
@@ -9,21 +11,24 @@ export default function Icon({
 	onClick,
 	color,
 	setColor,
-	isPaletteOpen,
 	isLocked,
 	sketchPickerRef,
 	lockIconRef,
 }) {
+	const { isPaletteOpen } = useContext(AppContext);
+
 	const icons = {
 		lock: isLocked ? "locked" : "unlocked",
 		copy: "copy",
 		palette: "color-palette",
 	};
+
 	const toolTip = {
 		lock: "Toggle lock",
 		copy: "Copy HEX",
 		palette: "Select color",
 	};
+
 	const srcPath =
 		hoveredIcon === type
 			? `icons/${icons[type]}-hover.svg`

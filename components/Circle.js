@@ -1,15 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AppContext } from "@components/AppContext";
 import chroma from "chroma-js";
 import CircleEditor from "./CircleEditor";
+import { hexToRgba } from "@utils/functions";
 
-export default function Circle({
-	color: initalColor = "#8b6ce0",
-	isPaletteOpen,
-	setIsPaletteOpen,
-	setIsNotificationShown,
-	setNotification,
-}) {
+export default function Circle({ color: initalColor = "#8b6ce0" }) {
+	const { isPaletteOpen } = useContext(AppContext);
 	const [color, setColor] = useState(initalColor);
 	const [showEditor, setShowEditor] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
@@ -42,12 +39,8 @@ export default function Circle({
 					setHoveredIcon={setHoveredIcon}
 					color={color}
 					setColor={setColor}
-					isPaletteOpen={isPaletteOpen}
-					setIsPaletteOpen={setIsPaletteOpen}
-					setIsNotificationShown={setIsNotificationShown}
 					showEditor={showEditor}
 					setShowEditor={setShowEditor}
-					setNotification={setNotification}
 				/>
 			</div>
 			<div
@@ -68,13 +61,4 @@ export default function Circle({
 			</div>
 		</div>
 	);
-}
-
-function hexToRgba(hex, opacity) {
-	hex = hex.replace("#", "");
-	const r = parseInt(hex.substring(0, 2), 16);
-	const g = parseInt(hex.substring(2, 4), 16);
-	const b = parseInt(hex.substring(4, 6), 16);
-
-	return `rgba(${r},${g},${b},${opacity})`;
 }

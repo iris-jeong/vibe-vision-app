@@ -1,8 +1,51 @@
+"use client";
+import React, { useContext, useEffect, useRef } from "react";
 import Link from "next/link";
+import { AppContext } from "@components/AppContext";
+import { hexToRgba } from "@utils/functions";
 
 export default function Header() {
+	const { colors } = useContext(AppContext);
+	const backgroundColor = hexToRgba(colors[4], 0.9);
+	const headerRef = useRef(null);
+	let prevScrollPos = useRef(window.pageYOffset);
+
+	const toggleHeaderVisibility = () => {
+		const currentScrollPos = window.pageYOffset;
+		const header = headerRef.current; // Access the DOM element directly
+
+		if (prevScrollPos.current > currentScrollPos) {
+			header.style.top = "0";
+
+			if (currentScrollPos > 50) {
+				header.classList.remove("move-back-animation");
+			} else {
+				header.classList.add("move-back-animation");
+			}
+		} else {
+			header.style.top = `-${header.clientHeight}px`;
+		}
+
+		prevScrollPos.current = currentScrollPos;
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", toggleHeaderVisibility);
+
+		return () => {
+			window.removeEventListener("scroll", toggleHeaderVisibility);
+		};
+	}, []);
+
 	return (
-		<nav className="w-full h-24 flex items-center justify-between p-6 fixed top-0">
+		<nav
+			ref={headerRef}
+			style={{
+				backgroundColor: backgroundColor,
+				boxShadow: `0px 2px 16px ${backgroundColor}`,
+			}}
+			className={`w-full h-24 fixed top-0 left-0 z-50 flex items-center justify-between p-6`}
+		>
 			<Link className="text-lg font-medium" href="/">
 				Vibe Vision
 			</Link>

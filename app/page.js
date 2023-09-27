@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from "@components/AppContext";
 import Circle from "@components/Circle";
 import Text from "@components/Text";
 import Illustration from "@components/Illustration";
@@ -7,11 +8,8 @@ import Image from "next/image";
 import FontList from "@components/FontList";
 
 export default function Home() {
-	const [isPaletteOpen, setIsPaletteOpen] = useState(false);
-	const [colors, setColors] = useState([]);
-	const [isNotificationShown, setIsNotificationShown] = useState(false);
-	const [notification, setNotification] = useState("");
-	const [isFontListShown, setIsFontListShown] = useState(false);
+	const { notification, isNotificationShown, colors } =
+		useContext(AppContext);
 
 	const getNotificationText = (type) => {
 		if (type === "copy") {
@@ -21,16 +19,9 @@ export default function Home() {
 		}
 	};
 
-	useEffect(() => {
-		setColors(["#8b6ce0", "#e3f6f5", "#bAe8e8", "#ffd803", "#faebd7"]);
-	}, []);
-
 	return (
 		<>
-			<FontList
-				isFontListShown={isFontListShown}
-				setIsFontListShown={setIsFontListShown}
-			/>
+			<FontList />
 
 			<div
 				className={`bg-[#00BB51] flex absolute py-4 px-6 rounded text-white ease-in-out duration-300 ${
@@ -52,16 +43,7 @@ export default function Home() {
 			<section className="home pt-28 px-4 min-h-screen w-3/4 min-w-[500px] max-w-[1000px] flex flex-col justify-center items-center">
 				<div className="top__row mb-6 md:mb-9 1028px:mb-14 px-1 w-full h-1/5 min-h-[110px] max-h-28 flex justify-between md:justify-evenly">
 					{colors.map((color) => {
-						return (
-							<Circle
-								key={color}
-								color={color}
-								isPaletteOpen={isPaletteOpen}
-								setIsPaletteOpen={setIsPaletteOpen}
-								setIsNotificationShown={setIsNotificationShown}
-								setNotification={setNotification}
-							/>
-						);
+						return <Circle key={color} color={color} />;
 					})}
 				</div>
 				{/* .top__row */}
@@ -71,19 +53,11 @@ export default function Home() {
 							isHeader={true}
 							font="Montserrat"
 							defaultValue="Curated colors and paired fonts in context."
-							setIsNotificationShown={setIsNotificationShown}
-							setNotification={setNotification}
-							isFontListShown={isFontListShown}
-							setIsFontListShown={setIsFontListShown}
 						/>
 						<Text
 							isHeader={false}
 							font="Arial"
 							defaultValue="Ever scratched your head trying to pick the perfect colors and fonts for your project? Vibe vision generates combinations for you and updates the site in real-time to show you what it would look like in the real world. Get help generating your color palette and font pairing by chatting with the AI who can help you find what you’re looking for. P.S. All the text in this section is editable so feel free to put your own copy in here."
-							setIsNotificationShown={setIsNotificationShown}
-							setNotification={setNotification}
-							isFontListShown={isFontListShown}
-							setIsFontListShown={setIsFontListShown}
 						/>
 					</div>
 					<div className="orange__container w-full mb-8 1028px:w-1/2 flex order-1 1028px:order-2">
