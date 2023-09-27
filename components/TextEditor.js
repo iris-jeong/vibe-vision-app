@@ -1,11 +1,9 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "@components/AppContext";
 
-export default function TextEditor({
-	font,
-	isFontListShown,
-	setIsFontListShown,
-}) {
+export default function TextEditor({ font }) {
+	const { isFontListShown, setIsFontListShown } = useContext(AppContext);
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
 	const [isLocked, setIsLocked] = useState(false);

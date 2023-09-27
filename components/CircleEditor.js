@@ -69,10 +69,6 @@ export default function CircleEditor({
 				displayNotification("copy");
 				break;
 			case "palette":
-				console.log(
-					`Palette icon clicked. Setting isPaletteOpen to: ${!isPaletteOpen}`
-				);
-
 				setIsPaletteOpen(!isPaletteOpen);
 				break;
 		}

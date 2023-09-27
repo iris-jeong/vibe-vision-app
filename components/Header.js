@@ -12,7 +12,7 @@ export default function Header() {
 
 	const toggleHeaderVisibility = () => {
 		const currentScrollPos = window.pageYOffset;
-		const header = headerRef.current; // Access the DOM element directly
+		const header = headerRef.current;
 
 		if (prevScrollPos.current > currentScrollPos) {
 			header.style.top = "0";
@@ -44,7 +44,7 @@ export default function Header() {
 				backgroundColor: backgroundColor,
 				boxShadow: `0px 2px 16px ${backgroundColor}`,
 			}}
-			className={`w-full h-24 fixed top-0 left-0 z-50 flex items-center justify-between p-6`}
+			className={`w-full h-[96px] fixed top-0 left-0 z-10 flex items-center justify-between p-6`}
 		>
 			<Link className="text-lg font-medium" href="/">
 				Vibe Vision

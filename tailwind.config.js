@@ -16,22 +16,22 @@ module.exports = {
 				"1028px": "1028px",
 			},
 			keyframes: {
-				slideInRight: {
+				slideInBottom: {
 					from: {
-						transform: "translateX(100%)",
+						transform: "translateY(100%)",
 						opacity: 0,
 					},
 					to: {
-						transform: "translateX(0)",
+						transform: "translateY(0)",
 						opacity: 100,
 					},
 				},
-				slideOutRight: {
+				slideOutBottom: {
 					from: {
-						transform: "translateX(0)",
+						transform: "translateY(0)",
 					},
 					to: {
-						transform: "translateX(100%)",
+						transform: "translateY(100%)",
 					},
 				},
 				slideInLeft: {

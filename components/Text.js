@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
 import TextEditor from "./TextEditor";
 import TextInput from "./TextInput";
 
@@ -13,7 +12,7 @@ export default function Text({
 	setIsFontListShown,
 }) {
 	return (
-		<div className="yellow__container flex-grow w-full mb-0">
+		<div className="yellow__container w-full mb-0">
 			<TextEditor
 				font={font}
 				setIsNotificationShown={setIsNotificationShown}

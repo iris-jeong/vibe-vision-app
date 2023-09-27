@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import Circle from "@components/Circle";
 import Text from "@components/Text";
@@ -24,10 +24,10 @@ export default function Home() {
 			<FontList />
 
 			<div
-				className={`bg-[#00BB51] flex absolute py-4 px-6 rounded text-white ease-in-out duration-300 ${
+				className={`bg-[#00BB51] py-4 px-6 w-[210px] fixed z-20 flex items-center rounded text-white ease-in-out duration-300 ${
 					isNotificationShown
-						? "animate-slide-in-right top-8 right-8 opacity-100"
-						: "animate-slide-out-right top-8 -right-[500px] opacity-0"
+						? "animate-slide-in-right transform translate-x-[-50%] inset-x-1/2 bottom-[50px] opacity-100"
+						: "animate-slide-out-right transform translate-x-[-50%] inset-x-1/2 bottom-[-50px] opacity-0"
 				}`}
 			>
 				<Image
@@ -36,7 +36,7 @@ export default function Home() {
 					src="icons/approve.svg"
 					alt="Success check mark icon"
 				/>
-				<span className="ml-2">
+				<span className="ml-2 whitespace-nowrap">
 					{getNotificationText(notification)}
 				</span>
 			</div>
