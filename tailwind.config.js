@@ -32,10 +32,28 @@ module.exports = {
 						transform: "translateX(100%)",
 					},
 				},
+				slideInLeft: {
+					from: {
+						transform: "translateX(0)",
+					},
+					to: {
+						transform: "translateX(100%)",
+					},
+				},
+				slideOutLeft: {
+					from: {
+						transform: "translateX(100%)",
+					},
+					to: {
+						transform: "translateX(0)",
+					},
+				},
 			},
 			animation: {
 				"slide-in-right": "slideInRight 0.3s ease-in-out forwards",
 				"slide-out-right": "slideOutRight 0.3s ease-in-out forwards",
+				"slide-in-left": "slideInLeft 0.3s ease-in-out forwards",
+				"slide-out-left": "slideOutLeft 0.3s ease-in-out forwards",
 				"spin-slow": "spin 3s linear infinite",
 			},
 		},

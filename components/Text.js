@@ -9,6 +9,8 @@ export default function Text({
 	defaultValue,
 	setIsNotificationShown,
 	setNotification,
+	isFontListShown,
+	setIsFontListShown,
 }) {
 	return (
 		<div className="yellow__container flex-grow w-full mb-0">
@@ -16,6 +18,8 @@ export default function Text({
 				font={font}
 				setIsNotificationShown={setIsNotificationShown}
 				setNotification={setNotification}
+				isFontListShown={isFontListShown}
+				setIsFontListShown={setIsFontListShown}
 			/>
 			<TextInput isHeader={isHeader} defaultValue={defaultValue} />
 		</div>

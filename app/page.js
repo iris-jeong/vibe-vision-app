@@ -4,12 +4,14 @@ import Circle from "@components/Circle";
 import Text from "@components/Text";
 import Illustration from "@components/Illustration";
 import Image from "next/image";
+import FontList from "@components/FontList";
 
 export default function Home() {
 	const [isPaletteOpen, setIsPaletteOpen] = useState(false);
 	const [colors, setColors] = useState([]);
 	const [isNotificationShown, setIsNotificationShown] = useState(false);
 	const [notification, setNotification] = useState("");
+	const [isFontListShown, setIsFontListShown] = useState(false);
 
 	const getNotificationText = (type) => {
 		if (type === "copy") {
@@ -25,6 +27,11 @@ export default function Home() {
 
 	return (
 		<>
+			<FontList
+				isFontListShown={isFontListShown}
+				setIsFontListShown={setIsFontListShown}
+			/>
+
 			<div
 				className={`bg-[#00BB51] flex absolute py-4 px-6 rounded text-white ease-in-out duration-300 ${
 					isNotificationShown
@@ -66,6 +73,8 @@ export default function Home() {
 							defaultValue="Curated colors and paired fonts in context."
 							setIsNotificationShown={setIsNotificationShown}
 							setNotification={setNotification}
+							isFontListShown={isFontListShown}
+							setIsFontListShown={setIsFontListShown}
 						/>
 						<Text
 							isHeader={false}
@@ -73,6 +82,8 @@ export default function Home() {
 							defaultValue="Ever scratched your head trying to pick the perfect colors and fonts for your project? Vibe vision generates combinations for you and updates the site in real-time to show you what it would look like in the real world. Get help generating your color palette and font pairing by chatting with the AI who can help you find what you’re looking for. P.S. All the text in this section is editable so feel free to put your own copy in here."
 							setIsNotificationShown={setIsNotificationShown}
 							setNotification={setNotification}
+							isFontListShown={isFontListShown}
+							setIsFontListShown={setIsFontListShown}
 						/>
 					</div>
 					<div className="orange__container w-full mb-8 1028px:w-1/2 flex order-1 1028px:order-2">

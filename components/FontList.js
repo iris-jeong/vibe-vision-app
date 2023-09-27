@@ -1,15 +1,26 @@
 import Image from "next/image";
 
-export default function FontList() {
+export default function FontList({ isFontListShown, setIsFontListShown }) {
+	const closeFontList = () => {
+		setIsFontListShown(false);
+	};
 	return (
-		<div className="absolute bg-[#fafafa] w-[250px] h-[500px] overflow-hidden overflow-y-auto border-2 border-[#bdbdbd] rounded">
+		<div
+			className={`${
+				isFontListShown
+					? "animate-slide-in-left"
+					: "animate-slide-out-left"
+			} fixed z-10 top-0 -left-[250px] bg-[#fafafa] w-[250px] h-full overflow-hidden overflow-y-auto border-2 border-[#bdbdbd] rounded`}
+		>
 			<div className="flex justify-between border-b border-[#bdbdbd] px-3 py-2">
 				<span className="font-semibold text-[14px]">Fonts</span>
 				<Image
+					className="cursor-pointer"
 					src="icons/cancel.svg"
 					alt="Cancel icon"
 					width={20}
 					height={20}
+					onClick={closeFontList}
 				/>
 			</div>
 			<div className="bg-[#f3f3f3] flex items-center px-3 py-3 border-b border-[#bdbdbd]">
