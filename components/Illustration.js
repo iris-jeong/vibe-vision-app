@@ -4,42 +4,42 @@ import Image from "next/image";
 export default function Illustration() {
 	return (
 		<aside className="w-full px-6 md:px-0">
-			<div class="header">
-				<div class="header-buttons button1"></div>
-				<div class="header-buttons button2"></div>
-				<div class="header-buttons button3"></div>
+			<div className="header">
+				<div className="header-buttons button1"></div>
+				<div className="header-buttons button2"></div>
+				<div className="header-buttons button3"></div>
 			</div>
-			<div class="screen">
-				<div class="sun">
-					<div class="sun-outline">
-						<div class="sun-circle"></div>
-						<div class="eyes"></div>
-						<div class="cheeks"></div>
-						<div class="smile"></div>
+			<div className="screen">
+				<div className="sun">
+					<div className="sun-outline">
+						<div className="sun-circle"></div>
+						<div className="eyes"></div>
+						<div className="cheeks"></div>
+						<div className="smile"></div>
 					</div>
 				</div>
 				{/* .sun */}
 
-				<div class="inner-screen">
-					<div class="textbox">
-						<div class="textbox-circle circle1"></div>
-						<div class="textbox-circle circle2"></div>
-						<div class="textbox-circle circle3"></div>
-						<div class="textbox-circle circle4"></div>
+				<div className="inner-screen">
+					<div className="textbox">
+						<div className="textbox-circle circle1"></div>
+						<div className="textbox-circle circle2"></div>
+						<div className="textbox-circle circle3"></div>
+						<div className="textbox-circle circle4"></div>
 						<p>Vibe Vision</p>
-						<div class="underline"></div>
+						<div className="underline"></div>
 					</div>
-					<div class="color-block"></div>
+					<div className="color-block"></div>
 				</div>
-				<div class="panel">
-					<div class="colorboxes">
-						<div class="colorbox colorbox1"></div>
-						<div class="colorbox colorbox2"></div>
+				<div className="panel">
+					<div className="colorboxes">
+						<div className="colorbox colorbox1"></div>
+						<div className="colorbox colorbox2"></div>
 					</div>
 					{/* .colorboxes */}
 
-					<div class="text-editor">
-						<div class="icon-container">
+					<div className="text-editor">
+						<div className="icon-container">
 							<Image
 								src="icons/capital-a.svg"
 								alt="Uppercase letter A"
@@ -47,8 +47,8 @@ export default function Illustration() {
 								height={24}
 							/>
 						</div>
-						<div class="icon-container">
-							<div class="icon">
+						<div className="icon-container">
+							<div className="icon">
 								<Image
 									src="icons/align-left.svg"
 									alt="Align left"
@@ -57,8 +57,8 @@ export default function Illustration() {
 								/>
 							</div>
 						</div>
-						<div class="icon-container">
-							<div class="icon">
+						<div className="icon-container">
+							<div className="icon">
 								<Image
 									src="icons/align-center.svg"
 									alt="Align center"
@@ -67,8 +67,8 @@ export default function Illustration() {
 								/>
 							</div>
 						</div>
-						<div class="icon-container">
-							<div class="icon">
+						<div className="icon-container">
+							<div className="icon">
 								<Image
 									src="icons/align-right.svg"
 									alt="Align right"
@@ -80,10 +80,10 @@ export default function Illustration() {
 					</div>
 					{/* .text-editor */}
 
-					<div class="extras">
-						<div class="circle extras-circle1"></div>
-						<div class="circle extras-circle2"></div>
-						<div class="circle extras-circle3"></div>
+					<div className="extras">
+						<div className="circle extras-circle1"></div>
+						<div className="circle extras-circle2"></div>
+						<div className="circle extras-circle3"></div>
 					</div>
 					{/* .extras */}
 				</div>

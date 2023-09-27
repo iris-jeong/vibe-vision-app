@@ -109,8 +109,8 @@ aside {
 .textbox-circle {
 	position: absolute;
 	background-color: #fff;
-	height: clamp(6px, 1vw, 10px);
-	width: clamp(6px, 1vw, 10px);
+	height: clamp(8px, 1vw, 10px);
+	width: clamp(8px, 1vw, 10px);
 	border-radius: 50%;
 	border: 1px solid #383838;
 }
