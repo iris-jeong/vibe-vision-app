@@ -1,14 +1,19 @@
 import React, { useEffect, useRef } from "react";
 
-export default function TextInput({ isHeader, defaultValue }) {
+export default function TextInput({
+	defaultValue,
+	fontSize,
+	fontWeight,
+	lineHeight,
+}) {
 	const textAreaRef = useRef(null);
 	const textAreaContainerRef = useRef(null);
 
-	const initialStyle = {
-		fontSize: isHeader ? "43px" : "16px",
-		fontWeight: isHeader ? "600" : "400",
-		lineHeight: isHeader ? "1.1" : "1.5",
-	};
+	// const initialStyle = {
+	// 	fontSize: isHeader ? "43px" : "16px",
+	// 	fontWeight: isHeader ? "600" : "400",
+	// 	lineHeight: isHeader ? "1.1" : "1.5",
+	// };
 
 	const autoResize = () => {
 		const textArea = textAreaRef.current;
@@ -36,8 +41,12 @@ export default function TextInput({ isHeader, defaultValue }) {
 		>
 			<textarea
 				ref={textAreaRef}
-				style={initialStyle}
-				className="leading-tight bg-[#faebd7] w-full h-full border-0 p-0 border-none focus:outline-none resize-none"
+				style={{
+					fontSize: fontSize,
+					fontWeight: fontWeight,
+					lineHeight: lineHeight,
+				}}
+				className={`bg-[#faebd7] w-full h-full border-0 p-0 border-none focus:outline-none resize-none`}
 				defaultValue={defaultValue}
 				onChange={autoResize}
 			/>

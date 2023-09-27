@@ -1,26 +1,22 @@
-import Image from "next/image";
 import TextEditor from "./TextEditor";
 import TextInput from "./TextInput";
 
 export default function Text({
 	font,
-	isHeader,
-	defaultValue,
-	setIsNotificationShown,
-	setNotification,
-	isFontListShown,
-	setIsFontListShown,
+	value,
+	fontSize,
+	fontWeight,
+	lineHeight,
 }) {
 	return (
-		<div className="yellow__container w-full mb-0">
-			<TextEditor
-				font={font}
-				setIsNotificationShown={setIsNotificationShown}
-				setNotification={setNotification}
-				isFontListShown={isFontListShown}
-				setIsFontListShown={setIsFontListShown}
+		<div className="yellow__container w-full mt-2 mb-0">
+			<TextEditor font={font} />
+			<TextInput
+				defaultValue={value}
+				fontSize={fontSize}
+				fontWeight={fontWeight}
+				lineHeight={lineHeight}
 			/>
-			<TextInput isHeader={isHeader} defaultValue={defaultValue} />
 		</div>
 	);
 }

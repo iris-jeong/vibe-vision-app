@@ -31,7 +31,9 @@ export default function TextEditor({ font }) {
 			onMouseEnter={() => toggleEditorVisibility(true)}
 			onMouseLeave={() => toggleEditorVisibility(false)}
 		>
-			<div className="blue__container text-sm w-fit">{font}</div>
+			<div className="blue__container font-semibold text-sm w-fit">
+				{font}
+			</div>
 			<div
 				className={`blue__container flex ${
 					editorIsHovered ? "opacity-100 ml-2" : "opacity-0"

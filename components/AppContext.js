@@ -10,6 +10,24 @@ export function AppProvider({ children }) {
 		"#ffd803",
 		"#faebd7",
 	]);
+	const [textBoxes, setTextBoxes] = useState([
+		{
+			isHeader: true,
+			font: "Inter",
+			value: "Curated colors and paired fonts in context.",
+			fontSize: "43px",
+			fontWeight: "600",
+			lineHeight: "1.1",
+		},
+		{
+			isHeader: false,
+			font: "Arial",
+			value: "Ever scratched your head trying to pick the perfect colors and fonts for your project? Vibe vision generates combinations for you and updates the site in real-time to show you what it would look like in the real world. Get help generating your color palette and font pairing by chatting with the AI who can help you find what you’re looking for. P.S. All the text in this section is editable so feel free to put your own copy in here.",
+			fontSize: "16px",
+			fontWeight: "400",
+			lineHeight: "1.5",
+		},
+	]);
 	const [isPaletteOpen, setIsPaletteOpen] = useState(false);
 	const [isNotificationShown, setIsNotificationShown] = useState(false);
 	const [notification, setNotification] = useState("");
@@ -28,6 +46,8 @@ export function AppProvider({ children }) {
 				setNotification,
 				isFontListShown,
 				setIsFontListShown,
+				textBoxes,
+				setTextBoxes,
 			}}
 		>
 			{children}
