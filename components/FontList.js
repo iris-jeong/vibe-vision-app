@@ -1,25 +1,43 @@
-import React, { useContext } from "react";
+"use client";
+import React, { useContext, useRef } from "react";
 import { AppContext } from "@components/AppContext";
 import Image from "next/image";
 
 export default function FontList() {
 	const { isFontListShown, setIsFontListShown } = useContext(AppContext);
+	const fontListRef = useRef(null);
 
 	const closeFontList = () => {
 		setIsFontListShown(false);
 	};
 
+	const handleOutsideClick = (e) => {
+		if (!fontListRef?.current.contains(e.target)) {
+			closeFontList();
+		}
+	};
+
 	return (
-		<div className={isFontListShown ? "fixed inset-0 z-20" : "hidden"}>
-			<div className="absolute inset-0 bg-black opacity-50"></div>
+		<div
+			className={`${
+				isFontListShown ? "fixed inset-0 z-20" : "invisible"
+			}`}
+		>
 			<div
-				className={`${
+				className="absolute inset-0 bg-black opacity-50"
+				onClick={handleOutsideClick}
+			></div>
+			<div
+				className={`ease-in-out duration-300 ${
 					isFontListShown
 						? "animate-slide-in-left visible"
 						: "animate-slide-out-left invisible"
 				} fixed z-30 opacity-100 top-0 -left-[250px] bg-[#fafafa] w-[250px] h-full overflow-hidden overflow-y-auto border-2 border-[#bdbdbd] rounded`}
 			>
-				<div className="flex justify-between border-b border-[#bdbdbd] px-3 py-2">
+				<div
+					ref={fontListRef}
+					className="flex justify-between border-b border-[#bdbdbd] px-3 py-2"
+				>
 					<span className="font-semibold text-[14px]">Fonts</span>
 					<Image
 						className="cursor-pointer"

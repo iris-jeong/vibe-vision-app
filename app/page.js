@@ -64,23 +64,24 @@ export default function Home() {
 						<Illustration />
 					</div>
 				</div>
-				<div className="yellow__container flex-grow w-full md:w-2/5 "></div>
-				<div className="buttons__container w-full flex justify-around md:order-3">
-					<div className="button__container">
-						<button
-							className="bg-[#8b6ce0] px-8 py-4 rounded-md text-white"
-							type="button"
-						>
-							Swap Colors
-						</button>
-					</div>
-					<div className="green__container">
-						<button
-							className="bg-[#8b6ce0] px-8 py-4 rounded-md text-white"
-							type="button"
-						>
-							Swap Fonts
-						</button>
+				<div className="yellow__container w-full">
+					<div className="buttons__container w-full flex justify-around md:order-3">
+						<div className="button__container">
+							<button
+								className="bg-[#8b6ce0] px-8 py-4 rounded-md text-white"
+								type="button"
+							>
+								Swap Colors
+							</button>
+						</div>
+						<div className="green__container">
+							<button
+								className="bg-[#8b6ce0] px-8 py-4 rounded-md text-white"
+								type="button"
+							>
+								Swap Fonts
+							</button>
+						</div>
 					</div>
 				</div>
 				{/* .bottom__row */}
