@@ -18,3 +18,42 @@ export function generateShade(hexColor, shade) {
 	}
 	return color;
 }
+
+export function loadFont(fontName) {
+	const WebFont = require("webfontloader");
+	if (fontName === "Buda") {
+		WebFont.load({
+			custom: {
+				families: ["Buda"],
+				urls: [
+					"https://fonts.googleapis.com/css2?family=Buda:wght@300",
+				],
+			},
+		});
+	} else if (fontName === "Sunflower") {
+		WebFont.load({
+			custom: {
+				families: ["Sunflower"],
+				urls: [
+					"https://fonts.googleapis.com/css2?family=Sunflower:wght@300",
+				],
+			},
+		});
+	} else if (fontName === "UnifrakturCook") {
+		WebFont.load({
+			custom: {
+				families: ["UnifrakturCook"],
+				urls: [
+					"https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700",
+				],
+			},
+		});
+	} else {
+		WebFont.load({
+			google: {
+				families: [fontName],
+			},
+			fontDisplay: "swap",
+		});
+	}
+}

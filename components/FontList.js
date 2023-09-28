@@ -2,15 +2,14 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
 import { AppContext } from "@components/AppContext";
+import { loadFont } from "@utils/functions";
 import Image from "next/image";
 
 export default function FontList() {
 	const { fonts, isFontListShown, setIsFontListShown } =
 		useContext(AppContext);
 	const fontListRef = useRef(null);
-	const [height, setHeight] = useState(
-		typeof window !== "undefined" ? window.innerHeight : 0
-	);
+	const [height, setHeight] = useState(window.innerHeight);
 
 	const closeFontList = () => {
 		setIsFontListShown(false);
@@ -23,6 +22,12 @@ export default function FontList() {
 	};
 
 	const Row = ({ index, style }) => {
+		const fontName = fonts[index].family;
+
+		useEffect(() => {
+			loadFont(fontName);
+		}, [fontName]);
+
 		return (
 			<div style={style}>
 				<p style={{ fontFamily: fonts[index].family }}>

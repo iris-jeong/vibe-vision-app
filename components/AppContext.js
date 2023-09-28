@@ -42,36 +42,23 @@ export function AppProvider({ children }) {
 		fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}`)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
-				const fetchedFonts = data.items.map((item) => {
-					const file =
-						item.files.regular ||
-						item.files.italic ||
-						item.files[300] ||
-						item.files[700];
+				const fetchedFonts = data.items
+					.filter((item) => item.family !== "Molle")
+					.map((item) => {
+						const file =
+							item.files.regular ||
+							item.files.italic ||
+							item.files[300] ||
+							item.files[700];
 
-					if (item.family === "Buda") {
-						console.log(`fonts: ${item.family} & files: ${file}`);
-					}
-					return {
-						category: item.category,
-						family: item.family,
-						files: file,
-					};
-				});
+						return {
+							category: item.category,
+							family: item.family,
+							files: file,
+						};
+					});
 
 				setFonts(fetchedFonts);
-
-				// if (typeof window !== "undefined") {
-				// 	const WebFont = require("webfontloader");
-				// 	fetchedFonts.map((font) => {
-				// 		WebFont.load({
-				// 			google: {
-				// 				families: [font.family],
-				// 			},
-				// 		});
-				// 	});
-				// }
 			})
 			.catch((error) => console.error("Error fetching fonts:", error));
 	}, []);

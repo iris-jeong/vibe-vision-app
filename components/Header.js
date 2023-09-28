@@ -8,9 +8,7 @@ export default function Header() {
 	const { colors } = useContext(AppContext);
 	const backgroundColor = hexToRgba(colors[4], 0.9);
 	const headerRef = useRef(null);
-	let prevScrollPos = useRef(
-		typeof window !== "undefined" ? window.pageYOffset : 0
-	);
+	let prevScrollPos = useRef(window.pageYOffset);
 
 	const toggleHeaderVisibility = () => {
 		const currentScrollPos = window.pageYOffset;
@@ -32,13 +30,11 @@ export default function Header() {
 	};
 
 	useEffect(() => {
-		if (typeof window !== "undefined") {
-			window.addEventListener("scroll", toggleHeaderVisibility);
+		window.addEventListener("scroll", toggleHeaderVisibility);
 
-			return () => {
-				window.removeEventListener("scroll", toggleHeaderVisibility);
-			};
-		}
+		return () => {
+			window.removeEventListener("scroll", toggleHeaderVisibility);
+		};
 	}, []);
 
 	return (

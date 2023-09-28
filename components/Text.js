@@ -7,6 +7,7 @@ export default function Text({
 	fontSize,
 	fontWeight,
 	lineHeight,
+	isHeader,
 }) {
 	return (
 		<div className="yellow__container w-full mt-2 mb-0 px-5">
@@ -16,6 +17,7 @@ export default function Text({
 				fontSize={fontSize}
 				fontWeight={fontWeight}
 				lineHeight={lineHeight}
+				isHeader={isHeader}
 			/>
 		</div>
 	);
