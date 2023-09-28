@@ -1,5 +1,7 @@
 "use client";
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+// import WebFont from "webfontloader";
+
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
@@ -32,6 +34,47 @@ export function AppProvider({ children }) {
 	const [isNotificationShown, setIsNotificationShown] = useState(false);
 	const [notification, setNotification] = useState("");
 	const [isFontListShown, setIsFontListShown] = useState(false);
+	const [fonts, setFonts] = useState([]);
+	const apiKey = process.env.NEXT_PUBLIC_GOOGLE_FONTS_API_KEY;
+
+	useEffect(() => {
+		//Fetch the fonts from Google Fonts API.
+		fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}`)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				const fetchedFonts = data.items.map((item) => {
+					const file =
+						item.files.regular ||
+						item.files.italic ||
+						item.files[300] ||
+						item.files[700];
+
+					if (item.family === "Buda") {
+						console.log(`fonts: ${item.family} & files: ${file}`);
+					}
+					return {
+						category: item.category,
+						family: item.family,
+						files: file,
+					};
+				});
+
+				setFonts(fetchedFonts);
+
+				// if (typeof window !== "undefined") {
+				// 	const WebFont = require("webfontloader");
+				// 	fetchedFonts.map((font) => {
+				// 		WebFont.load({
+				// 			google: {
+				// 				families: [font.family],
+				// 			},
+				// 		});
+				// 	});
+				// }
+			})
+			.catch((error) => console.error("Error fetching fonts:", error));
+	}, []);
 
 	return (
 		<AppContext.Provider
@@ -48,6 +91,7 @@ export function AppProvider({ children }) {
 				setIsFontListShown,
 				textBoxes,
 				setTextBoxes,
+				fonts,
 			}}
 		>
 			{children}

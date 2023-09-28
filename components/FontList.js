@@ -1,11 +1,16 @@
 "use client";
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
+import { FixedSizeList as List } from "react-window";
 import { AppContext } from "@components/AppContext";
 import Image from "next/image";
 
 export default function FontList() {
-	const { isFontListShown, setIsFontListShown } = useContext(AppContext);
+	const { fonts, isFontListShown, setIsFontListShown } =
+		useContext(AppContext);
 	const fontListRef = useRef(null);
+	const [height, setHeight] = useState(
+		typeof window !== "undefined" ? window.innerHeight : 0
+	);
 
 	const closeFontList = () => {
 		setIsFontListShown(false);
@@ -17,6 +22,26 @@ export default function FontList() {
 		}
 	};
 
+	const Row = ({ index, style }) => {
+		return (
+			<div style={style}>
+				<p style={{ fontFamily: fonts[index].family }}>
+					{fonts[index].family}
+				</p>
+			</div>
+		);
+	};
+
+	useEffect(() => {
+		const handleResize = () => {
+			setHeight(window.innerHeight);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 	return (
 		<div
 			className={`${
@@ -61,29 +86,15 @@ export default function FontList() {
 						className="bg-[#f3f3f3] w-full focus:outline-none pl-2 text-[13px]"
 					/>
 				</div>
-				<div className="">
-					<div className="bg-slate-50 pl-3 py-[5px]">ABeezee</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Abel</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">
-						Abhaya Libre
-					</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">
-						Abril Fatface
-					</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Aclonica</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Acme</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Adamina</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Adobe Blank</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Adobe Pro</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Aguafina</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">
-						Akaya Kanadaka
-					</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Akronim</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Aksara Bali</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Akshar</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Adamina</div>
-					<div className="bg-slate-50 pl-3 py-[5px]">Adobe Blank</div>
+				<div className="fontsList">
+					<List
+						height={height}
+						itemCount={fonts.length}
+						itemSize={35}
+						width={250}
+					>
+						{Row}
+					</List>
 				</div>
 			</div>
 		</div>

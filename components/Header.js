@@ -8,7 +8,6 @@ export default function Header() {
 	const { colors } = useContext(AppContext);
 	const backgroundColor = hexToRgba(colors[4], 0.9);
 	const headerRef = useRef(null);
-	// let prevScrollPos = useRef(window.pageYOffset);
 	let prevScrollPos = useRef(
 		typeof window !== "undefined" ? window.pageYOffset : 0
 	);
@@ -32,13 +31,6 @@ export default function Header() {
 		prevScrollPos.current = currentScrollPos;
 	};
 
-	// useEffect(() => {
-	// 	window.addEventListener("scroll", toggleHeaderVisibility);
-
-	// 	return () => {
-	// 		window.removeEventListener("scroll", toggleHeaderVisibility);
-	// 	};
-	// }, []);
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			window.addEventListener("scroll", toggleHeaderVisibility);
