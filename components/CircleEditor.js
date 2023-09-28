@@ -56,7 +56,7 @@ export default function CircleEditor({
 		return () => {
 			document.removeEventListener("mousedown", handleOutsideClick);
 		};
-	}, [showEditor]);
+	}, [showEditor, handleOutsideClick]);
 
 	const handleIconClick = (type, event) => {
 		event?.stopPropagation();
