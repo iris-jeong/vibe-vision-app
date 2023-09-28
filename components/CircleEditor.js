@@ -6,6 +6,7 @@ export default function CircleEditor({
 	hoveredIcon,
 	setHoveredIcon,
 	color,
+	colorIndex,
 	setColor,
 	showEditor,
 	setShowEditor,
@@ -86,6 +87,7 @@ export default function CircleEditor({
 						onMouseLeave={() => setHoveredIcon(null)}
 						onClick={(event) => handleIconClick(iconType, event)}
 						color={color}
+						colorIndex={colorIndex}
 						setColor={setColor}
 						isLocked={isLocked}
 						sketchPickerRef={sketchPickerRef}

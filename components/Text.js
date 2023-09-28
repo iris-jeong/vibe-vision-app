@@ -9,7 +9,7 @@ export default function Text({
 	lineHeight,
 }) {
 	return (
-		<div className="yellow__container w-full mt-2 mb-0">
+		<div className="yellow__container w-full mt-2 mb-0 px-5">
 			<TextEditor font={font} />
 			<TextInput
 				defaultValue={value}

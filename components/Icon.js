@@ -10,12 +10,13 @@ export default function Icon({
 	onMouseLeave,
 	onClick,
 	color,
+	colorIndex,
 	setColor,
 	isLocked,
 	sketchPickerRef,
 	lockIconRef,
 }) {
-	const { isPaletteOpen } = useContext(AppContext);
+	const { isPaletteOpen, colors, setColors } = useContext(AppContext);
 
 	const icons = {
 		lock: isLocked ? "locked" : "unlocked",
@@ -88,6 +89,17 @@ export default function Icon({
 						color={color}
 						onChange={(color) => {
 							setColor(color.hex);
+							// Create a new array with the updated color
+							const updatedColors = colors.map(
+								(existingColor, i) => {
+									return i === colorIndex
+										? color.hex
+										: existingColor;
+								}
+							);
+
+							// Update the colors array
+							setColors(updatedColors);
 						}}
 					/>
 				</div>

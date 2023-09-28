@@ -15,7 +15,7 @@ export function AppProvider({ children }) {
 			isHeader: true,
 			font: "Inter",
 			value: "Curated colors and paired fonts in context.",
-			fontSize: "43px",
+			fontSize: "46px",
 			fontWeight: "600",
 			lineHeight: "1.1",
 		},

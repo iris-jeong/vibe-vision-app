@@ -10,19 +10,28 @@ import GenerateButtons from "@components/GenerateButtons";
 
 export default function Home() {
 	const { colors, textBoxes } = useContext(AppContext);
-
+	const backgroundColor = colors[4];
 	return (
-		<>
+		<div
+			style={{ backgroundColor: backgroundColor }}
+			className="flex w-full justify-center"
+		>
 			<FontList />
 			<Notification />
 			<section className="home pt-28 px-4 min-h-screen w-3/4 min-w-[500px] max-w-[1000px] flex flex-col justify-center items-center">
 				<div className="top__row mb-6 md:mb-9 1028px:mb-14 px-1 w-full h-1/5 min-h-[110px] max-h-28 flex justify-between md:justify-evenly">
-					{colors.map((color) => {
-						return <Circle key={color} color={color} />;
+					{colors.map((color, index) => {
+						return (
+							<Circle
+								key={index}
+								colorIndex={index}
+								color={color}
+							/>
+						);
 					})}
 				</div>
 				{/* .top__row */}
-				<div className="bottom__row red__container w-full flex flex-col 1028px:flex-row">
+				<div className="bottom__row red__container w-full flex items-center flex-col 1028px:flex-row">
 					<div className="orange__container mb-20 w-full 1028px:w-3/5 flex flex-col order-2 1028px:order-1">
 						{textBoxes.map((textBox, index) => {
 							return <Text key={index} {...textBox} />;
@@ -37,6 +46,6 @@ export default function Home() {
 				</div>
 				{/* .bottom__row */}
 			</section>
-		</>
+		</div>
 	);
 }

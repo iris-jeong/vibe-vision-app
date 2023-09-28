@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
+import { AppContext } from "@components/AppContext";
 
 export default function TextInput({
 	defaultValue,
@@ -8,12 +9,8 @@ export default function TextInput({
 }) {
 	const textAreaRef = useRef(null);
 	const textAreaContainerRef = useRef(null);
-
-	// const initialStyle = {
-	// 	fontSize: isHeader ? "43px" : "16px",
-	// 	fontWeight: isHeader ? "600" : "400",
-	// 	lineHeight: isHeader ? "1.1" : "1.5",
-	// };
+	const { colors } = useContext(AppContext);
+	const backgroundColor = colors[4];
 
 	const autoResize = () => {
 		const textArea = textAreaRef.current;
@@ -42,11 +39,12 @@ export default function TextInput({
 			<textarea
 				ref={textAreaRef}
 				style={{
+					backgroundColor: backgroundColor,
 					fontSize: fontSize,
 					fontWeight: fontWeight,
 					lineHeight: lineHeight,
 				}}
-				className={`bg-[#faebd7] w-full h-full border-0 p-0 border-none focus:outline-none resize-none`}
+				className={`w-full h-full border-0 py-0 pl-0 pr-2 border-none focus:outline-none resize-none`}
 				defaultValue={defaultValue}
 				onChange={autoResize}
 			/>

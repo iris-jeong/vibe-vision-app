@@ -1,9 +1,8 @@
-import { hexToRgba } from "@utils/functions";
-import chroma from "chroma-js";
+import { hexToRgba, generateShade } from "@utils/functions";
 
 export default function CircleColor({ color, showEditor }) {
-	const lighterColor = chroma(color).brighten(1).hex();
-	const darkerColor = chroma(color).darken(1).hex();
+	const lighterColor = generateShade(color, "lighter");
+	const darkerColor = generateShade(color, "darker");
 
 	return (
 		<div

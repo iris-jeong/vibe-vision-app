@@ -13,7 +13,7 @@
 	--light-gray: #f6f6f6;
 }
 body {
-	background-color: var(--cream);
+	/* background-color: var(--cream); */
 	/* width: 100%; */
 }
 nav {
