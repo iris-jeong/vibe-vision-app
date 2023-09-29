@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect, useContext, useCallback } from "react";
 import { AppContext } from "@components/AppContext";
 import Icon from "./Icon";
 
@@ -23,7 +23,7 @@ export default function CircleEditor({
 	const editorRef = useRef(null);
 	const lockIconRef = useRef(null);
 
-	const handleOutsideClick = (event) => {
+	const handleOutsideClick = useCallback((event) => {
 		if (showEditor) {
 			//If the user clicked inside of the color palette, do nothing.
 			if (
@@ -41,7 +41,7 @@ export default function CircleEditor({
 				setShowEditor(false);
 			}
 		}
-	};
+	}, []);
 
 	const displayNotification = (type) => {
 		setIsNotificationShown(true);
