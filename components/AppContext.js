@@ -5,7 +5,11 @@ import React, { createContext, useState, useEffect } from "react";
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-	const [fonts, setFonts] = useState(["IBM Plex Sans", "Inter"]);
+	const [activeEditor, setActiveEditor] = useState(null);
+	const [fonts, setFonts] = useState({
+		editor1: "IBM Plex Sans",
+		editor2: "Inter",
+	});
 	const [colors, setColors] = useState([
 		"#8b6ce0",
 		"#e3f6f5",
@@ -34,6 +38,7 @@ export function AppProvider({ children }) {
 	const [notification, setNotification] = useState("");
 	const [isFontListShown, setIsFontListShown] = useState(false);
 	const [fontList, setFontList] = useState([]);
+
 	const apiKey = process.env.NEXT_PUBLIC_GOOGLE_FONTS_API_KEY;
 
 	useEffect(() => {
@@ -79,6 +84,9 @@ export function AppProvider({ children }) {
 				setTextBoxes,
 				fontList,
 				fonts,
+				setFonts,
+				activeEditor,
+				setActiveEditor,
 			}}
 		>
 			{children}

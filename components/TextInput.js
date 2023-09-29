@@ -7,7 +7,7 @@ export default function TextInput({
 	fontSize,
 	fontWeight,
 	lineHeight,
-	font,
+	editorId,
 }) {
 	const textAreaRef = useRef(null);
 	const textAreaContainerRef = useRef(null);
@@ -25,7 +25,8 @@ export default function TextInput({
 	};
 
 	useEffect(() => {
-		loadFont(font);
+		console.log(fonts[editorId]);
+		loadFont(fonts[editorId]);
 
 		window.addEventListener("resize", autoResize);
 		autoResize(textAreaRef.current, textAreaContainerRef.current); //Initial resize.
@@ -33,7 +34,7 @@ export default function TextInput({
 		return () => {
 			window.removeEventListener("resize", autoResize);
 		};
-	}, []);
+	}, [fonts]);
 
 	return (
 		<div
@@ -47,7 +48,7 @@ export default function TextInput({
 					fontSize: fontSize,
 					fontWeight: fontWeight,
 					lineHeight: lineHeight,
-					fontFamily: font,
+					fontFamily: fonts[editorId],
 				}}
 				className={`w-full h-full border-0 py-0 pl-0 pr-2 border-none focus:outline-none resize-none`}
 				defaultValue={defaultValue}

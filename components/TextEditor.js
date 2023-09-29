@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 
-export default function TextEditor({ font }) {
-	const { isFontListShown, setIsFontListShown } = useContext(AppContext);
+export default function TextEditor({ editorId }) {
+	const { fonts, isFontListShown, setIsFontListShown, setActiveEditor } =
+		useContext(AppContext);
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
 	const [isLocked, setIsLocked] = useState(false);
@@ -24,6 +25,7 @@ export default function TextEditor({ font }) {
 	const toggleFontListVisibility = (status) => {
 		setIsFontListShown(status);
 	};
+	console.log(editorId);
 
 	return (
 		<div
@@ -31,7 +33,9 @@ export default function TextEditor({ font }) {
 			onMouseEnter={() => toggleEditorVisibility(true)}
 			onMouseLeave={() => toggleEditorVisibility(false)}
 		>
-			<div className="blue__container text-sm w-fit">{font}</div>
+			<div className="blue__container text-sm w-fit">
+				{fonts[editorId]}
+			</div>
 			<div
 				className={`blue__container flex ${
 					editorIsHovered ? "opacity-100 ml-2" : "opacity-0"
@@ -64,9 +68,10 @@ export default function TextEditor({ font }) {
 						height={25}
 						onMouseEnter={() => setHoveredIcon("font")}
 						onMouseLeave={() => setHoveredIcon(null)}
-						onClick={() =>
-							toggleFontListVisibility(!isFontListShown)
-						}
+						onClick={() => {
+							setActiveEditor(editorId);
+							toggleFontListVisibility(!isFontListShown);
+						}}
 					/>
 				</span>
 			</div>

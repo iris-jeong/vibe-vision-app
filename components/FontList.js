@@ -6,8 +6,14 @@ import { loadFont } from "@utils/functions";
 import Image from "next/image";
 
 export default function FontList() {
-	const { fontList, isFontListShown, setIsFontListShown } =
-		useContext(AppContext);
+	const {
+		setFonts,
+		fontList,
+		isFontListShown,
+		setIsFontListShown,
+		activeEditor,
+		fonts,
+	} = useContext(AppContext);
 	const fontListRef = useRef(null);
 	const [height, setHeight] = useState(window.innerHeight);
 	const [loadedFonts, setLoadedFonts] = useState(new Set());
@@ -38,6 +44,16 @@ export default function FontList() {
 		setFilteredFonts(newFilteredFonts);
 	};
 
+	const handleFontClick = (e) => {
+		const fontName = e.currentTarget.textContent;
+		if (activeEditor) {
+			setFonts((prevFonts) => ({
+				...prevFonts,
+				[activeEditor]: fontName,
+			}));
+		}
+	};
+
 	const Row = ({ index, style }) => {
 		const fontName = filteredFonts[index].family;
 
@@ -50,6 +66,7 @@ export default function FontList() {
 
 		return (
 			<div
+				onClick={handleFontClick}
 				style={style}
 				className="hover:bg-[#efefef] hover:shadow-[0_0_8px_0_rgba(210,210,210,1.0)] pl-[36px] flex items-center cursor-pointer"
 			>

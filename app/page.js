@@ -42,6 +42,7 @@ export default function Home() {
 							return (
 								<Text
 									key={index}
+									editorId={`editor${index + 1}`}
 									font={fonts[index]}
 									{...textBox}
 								/>
