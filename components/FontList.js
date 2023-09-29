@@ -6,12 +6,14 @@ import { loadFont } from "@utils/functions";
 import Image from "next/image";
 
 export default function FontList() {
-	const { colors, fonts, isFontListShown, setIsFontListShown } =
+	const { fonts, isFontListShown, setIsFontListShown } =
 		useContext(AppContext);
 	const fontListRef = useRef(null);
 	const [height, setHeight] = useState(window.innerHeight);
 	const [loadedFonts, setLoadedFonts] = useState(new Set());
-	const backgroundColor = colors[4];
+	const [searchedFont, setSearchedFont] = useState("");
+	const [filteredFonts, setFilteredFonts] = useState(fonts);
+
 	const closeFontList = () => {
 		setIsFontListShown(false);
 	};
@@ -22,8 +24,22 @@ export default function FontList() {
 		}
 	};
 
+	const handleFontChange = (e) => {
+		const searchValue = e.target.value;
+
+		setSearchedFont(searchValue);
+
+		const newFilteredFonts = fonts.filter((font) => {
+			return font.family
+				.toLowerCase()
+				.includes(searchValue.toLowerCase());
+		});
+
+		setFilteredFonts(newFilteredFonts);
+	};
+
 	const Row = ({ index, style }) => {
-		const fontName = fonts[index].family;
+		const fontName = filteredFonts[index].family;
 
 		useEffect(() => {
 			if (!loadedFonts.has(fontName)) {
@@ -37,8 +53,8 @@ export default function FontList() {
 				style={style}
 				className="hover:bg-[#efefef] hover:shadow-[0_0_8px_0_rgba(210,210,210,1.0)] pl-[36px] flex items-center cursor-pointer"
 			>
-				<p style={{ fontFamily: fonts[index].family }}>
-					{fonts[index].family}
+				<p style={{ fontFamily: filteredFonts[index].family }}>
+					{filteredFonts[index].family}
 				</p>
 			</div>
 		);
@@ -69,7 +85,7 @@ export default function FontList() {
 					isFontListShown
 						? "animate-slide-in-left visible"
 						: "animate-slide-out-left invisible"
-				} fixed z-30 opacity-100 top-0 -left-[250px] bg-[#fafafa] w-[250px] h-full overflow-hidden overflow-y-auto border-2 border-[#bdbdbd] rounded`}
+				} fixed z-30 opacity-100 top-0 -left-[300px] bg-[#fafafa] w-[300px] h-full overflow-hidden overflow-y-auto border-2 border-[#bdbdbd] rounded`}
 			>
 				<div
 					ref={fontListRef}
@@ -100,14 +116,16 @@ export default function FontList() {
 						type="text"
 						placeholder="Search fonts"
 						className="bg-[#f3f3f3] w-full focus:outline-none pl-2 text-[13px]"
+						value={searchedFont}
+						onChange={handleFontChange}
 					/>
 				</div>
-				<div className="fontsList bg-[#f6f6f6]">
+				<div className="fontsList bg-[#fafafa]">
 					<List
 						height={height}
-						itemCount={fonts.length}
+						itemCount={filteredFonts.length}
 						itemSize={35}
-						width={250}
+						width={300}
 						overscanCount={50}
 					>
 						{Row}
