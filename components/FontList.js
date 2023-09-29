@@ -6,13 +6,13 @@ import { loadFont } from "@utils/functions";
 import Image from "next/image";
 
 export default function FontList() {
-	const { fonts, isFontListShown, setIsFontListShown } =
+	const { fontList, isFontListShown, setIsFontListShown } =
 		useContext(AppContext);
 	const fontListRef = useRef(null);
 	const [height, setHeight] = useState(window.innerHeight);
 	const [loadedFonts, setLoadedFonts] = useState(new Set());
 	const [searchedFont, setSearchedFont] = useState("");
-	const [filteredFonts, setFilteredFonts] = useState(fonts);
+	const [filteredFonts, setFilteredFonts] = useState(fontList);
 
 	const closeFontList = () => {
 		setIsFontListShown(false);
@@ -29,7 +29,7 @@ export default function FontList() {
 
 		setSearchedFont(searchValue);
 
-		const newFilteredFonts = fonts.filter((font) => {
+		const newFilteredFonts = fontList.filter((font) => {
 			return font.family
 				.toLowerCase()
 				.includes(searchValue.toLowerCase());

@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { AppContext } from "@components/AppContext";
+import { loadFont } from "@utils/functions";
 
 export default function TextInput({
 	defaultValue,
 	fontSize,
 	fontWeight,
 	lineHeight,
+	font,
 }) {
 	const textAreaRef = useRef(null);
 	const textAreaContainerRef = useRef(null);
-	const { colors } = useContext(AppContext);
+	const { colors, fonts } = useContext(AppContext);
 	const backgroundColor = colors[4];
 
 	const autoResize = () => {
@@ -23,13 +25,15 @@ export default function TextInput({
 	};
 
 	useEffect(() => {
+		loadFont(font);
+
 		window.addEventListener("resize", autoResize);
 		autoResize(textAreaRef.current, textAreaContainerRef.current); //Initial resize.
 
 		return () => {
 			window.removeEventListener("resize", autoResize);
 		};
-	});
+	}, []);
 
 	return (
 		<div
@@ -43,6 +47,7 @@ export default function TextInput({
 					fontSize: fontSize,
 					fontWeight: fontWeight,
 					lineHeight: lineHeight,
+					fontFamily: font,
 				}}
 				className={`w-full h-full border-0 py-0 pl-0 pr-2 border-none focus:outline-none resize-none`}
 				defaultValue={defaultValue}

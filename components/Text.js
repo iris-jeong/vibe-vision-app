@@ -18,6 +18,7 @@ export default function Text({
 				fontWeight={fontWeight}
 				lineHeight={lineHeight}
 				isHeader={isHeader}
+				font={font}
 			/>
 		</div>
 	);

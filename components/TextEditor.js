@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AppContext } from "@components/AppContext";
 
 export default function TextEditor({ font }) {

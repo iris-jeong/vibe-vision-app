@@ -13,8 +13,9 @@ const DynamicFontList = dynamic(() => import("@components/FontList"), {
 });
 
 export default function Home() {
-	const { colors, textBoxes } = useContext(AppContext);
+	const { colors, fonts, textBoxes } = useContext(AppContext);
 	const backgroundColor = colors[4];
+
 	return (
 		<div
 			style={{ backgroundColor: backgroundColor }}
@@ -38,7 +39,13 @@ export default function Home() {
 				<div className="bottom__row red__container w-full flex items-center flex-col 1028px:flex-row">
 					<div className="orange__container mb-20 w-full 1028px:w-3/5 flex flex-col order-2 1028px:order-1">
 						{textBoxes.map((textBox, index) => {
-							return <Text key={index} {...textBox} />;
+							return (
+								<Text
+									key={index}
+									font={fonts[index]}
+									{...textBox}
+								/>
+							);
 						})}
 					</div>
 					<div className="orange__container w-full mb-6 1028px:w-1/2 flex order-1 1028px:order-2">

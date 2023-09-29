@@ -5,6 +5,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
+	const [fonts, setFonts] = useState(["IBM Plex Sans", "Inter"]);
 	const [colors, setColors] = useState([
 		"#8b6ce0",
 		"#e3f6f5",
@@ -15,7 +16,6 @@ export function AppProvider({ children }) {
 	const [textBoxes, setTextBoxes] = useState([
 		{
 			isHeader: true,
-			font: "Inter",
 			value: "Curated colors and paired fonts in context.",
 			fontSize: "46px",
 			fontWeight: "600",
@@ -23,7 +23,6 @@ export function AppProvider({ children }) {
 		},
 		{
 			isHeader: false,
-			font: "Arial",
 			value: "Ever scratched your head trying to pick the perfect colors and fonts for your project? Vibe vision generates combinations for you and updates the site in real-time to show you what it would look like in the real world. Get help generating your color palette and font pairing by chatting with the AI who can help you find what you’re looking for. P.S. All the text in this section is editable so feel free to put your own copy in here.",
 			fontSize: "16px",
 			fontWeight: "400",
@@ -34,7 +33,7 @@ export function AppProvider({ children }) {
 	const [isNotificationShown, setIsNotificationShown] = useState(false);
 	const [notification, setNotification] = useState("");
 	const [isFontListShown, setIsFontListShown] = useState(false);
-	const [fonts, setFonts] = useState([]);
+	const [fontList, setFontList] = useState([]);
 	const apiKey = process.env.NEXT_PUBLIC_GOOGLE_FONTS_API_KEY;
 
 	useEffect(() => {
@@ -58,7 +57,7 @@ export function AppProvider({ children }) {
 						};
 					});
 
-				setFonts(fetchedFonts);
+				setFontList(fetchedFonts);
 			})
 			.catch((error) => console.error("Error fetching fonts:", error));
 	}, []);
@@ -78,6 +77,7 @@ export function AppProvider({ children }) {
 				setIsFontListShown,
 				textBoxes,
 				setTextBoxes,
+				fontList,
 				fonts,
 			}}
 		>
