@@ -6,11 +6,12 @@ import { loadFont } from "@utils/functions";
 import Image from "next/image";
 
 export default function FontList() {
-	const { fonts, isFontListShown, setIsFontListShown } =
+	const { colors, fonts, isFontListShown, setIsFontListShown } =
 		useContext(AppContext);
 	const fontListRef = useRef(null);
 	const [height, setHeight] = useState(window.innerHeight);
-
+	const [loadedFonts, setLoadedFonts] = useState(new Set());
+	const backgroundColor = colors[4];
 	const closeFontList = () => {
 		setIsFontListShown(false);
 	};
@@ -25,11 +26,17 @@ export default function FontList() {
 		const fontName = fonts[index].family;
 
 		useEffect(() => {
-			loadFont(fontName);
+			if (!loadedFonts.has(fontName)) {
+				loadFont(fontName);
+				setLoadedFonts((prev) => new Set([...prev, fontName]));
+			}
 		}, [fontName]);
 
 		return (
-			<div style={style}>
+			<div
+				style={style}
+				className="hover:bg-[#efefef] hover:shadow-[0_0_8px_0_rgba(210,210,210,1.0)] pl-[36px] flex items-center cursor-pointer"
+			>
 				<p style={{ fontFamily: fonts[index].family }}>
 					{fonts[index].family}
 				</p>
@@ -66,37 +73,42 @@ export default function FontList() {
 			>
 				<div
 					ref={fontListRef}
-					className="flex justify-between border-b border-[#bdbdbd] px-3 py-2"
+					className="flex justify-between items-center border-b border-[#bdbdbd] px-3 py-2"
 				>
 					<span className="font-semibold text-[14px]">Fonts</span>
 					<Image
 						className="cursor-pointer"
 						src="icons/cancel.svg"
 						alt="Cancel icon"
-						width={20}
-						height={20}
+						width={28}
+						height={28}
 						onClick={closeFontList}
 					/>
 				</div>
-				<div className="bg-[#f3f3f3] flex items-center px-3 py-3 border-b border-[#bdbdbd]">
-					<Image
-						src="icons/search.svg"
-						alt="Search icon"
-						width={18}
-						height={18}
-					/>
+				<div className="bg-[#f3f3f3] flex items-center mb-4 px-3 py-3 border-b border-[#bdbdbd] shadow-[0_0_2px_0_rgba(210,210,210,1.0)]">
+					<label htmlFor="search">
+						<Image
+							src="icons/search.svg"
+							alt="Search icon"
+							width={18}
+							height={18}
+						/>
+					</label>
 					<input
+						id="search"
+						name="search"
 						type="text"
 						placeholder="Search fonts"
 						className="bg-[#f3f3f3] w-full focus:outline-none pl-2 text-[13px]"
 					/>
 				</div>
-				<div className="fontsList">
+				<div className="fontsList bg-[#f6f6f6]">
 					<List
 						height={height}
 						itemCount={fonts.length}
 						itemSize={35}
 						width={250}
+						overscanCount={50}
 					>
 						{Row}
 					</List>
