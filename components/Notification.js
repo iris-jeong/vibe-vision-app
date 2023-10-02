@@ -4,12 +4,11 @@ import Image from "next/image";
 
 export default function Notification() {
 	const { notification, isNotificationShown } = useContext(AppContext);
+	const { type, item } = notification;
 
-	const getNotificationText = (type) => {
+	const getNotificationText = (type, item) => {
 		if (type === "copy") {
-			return "HEX color copied!";
-		} else if (type === "lock") {
-			return "Color locked!";
+			return `Copied ${item} to clipboard`;
 		}
 	};
 
@@ -28,7 +27,7 @@ export default function Notification() {
 				alt="Success check mark icon"
 			/>
 			<div className="ml-2 whitespace-nowrap">
-				{getNotificationText(notification)}
+				{getNotificationText(type, item)}
 			</div>
 		</div>
 	);

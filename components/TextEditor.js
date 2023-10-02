@@ -2,9 +2,10 @@ import Image from "next/image";
 import { useState, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 
-export default function TextEditor({ editorId }) {
-	const { fonts, isFontListShown, setIsFontListShown, setActiveEditor } =
+export default function TextEditor({ editorId, editor }) {
+	const { updateEditorState, updateUiState, isFontListShown } =
 		useContext(AppContext);
+
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
 	const [isLocked, setIsLocked] = useState(false);
@@ -23,9 +24,8 @@ export default function TextEditor({ editorId }) {
 	};
 
 	const toggleFontListVisibility = (status) => {
-		setIsFontListShown(status);
+		updateUiState({ isFontListShown: status });
 	};
-	console.log(editorId);
 
 	return (
 		<div
@@ -34,7 +34,7 @@ export default function TextEditor({ editorId }) {
 			onMouseLeave={() => toggleEditorVisibility(false)}
 		>
 			<div className="blue__container text-sm w-fit">
-				{fonts[editorId]}
+				{editor.fontFamily}
 			</div>
 			<div
 				className={`blue__container flex ${
@@ -69,7 +69,7 @@ export default function TextEditor({ editorId }) {
 						onMouseEnter={() => setHoveredIcon("font")}
 						onMouseLeave={() => setHoveredIcon(null)}
 						onClick={() => {
-							setActiveEditor(editorId);
+							updateEditorState({ activeEditor: editorId });
 							toggleFontListVisibility(!isFontListShown);
 						}}
 					/>

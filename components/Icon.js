@@ -16,7 +16,7 @@ export default function Icon({
 	sketchPickerRef,
 	lockIconRef,
 }) {
-	const { isPaletteOpen, colors, setColors } = useContext(AppContext);
+	const { isPaletteOpen, updateEditorState, colors } = useContext(AppContext);
 
 	const icons = {
 		lock: isLocked ? "locked" : "unlocked",
@@ -89,6 +89,7 @@ export default function Icon({
 						color={color}
 						onChange={(color) => {
 							setColor(color.hex);
+
 							// Create a new array with the updated color
 							const updatedColors = colors.map(
 								(existingColor, i) => {
@@ -99,7 +100,9 @@ export default function Icon({
 							);
 
 							// Update the colors array
-							setColors(updatedColors);
+							updateEditorState({
+								colors: updatedColors,
+							});
 						}}
 					/>
 				</div>

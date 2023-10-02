@@ -7,13 +7,13 @@ import Image from "next/image";
 
 export default function FontList() {
 	const {
-		setFonts,
 		fontList,
+		updateUiState,
+		updateEditorFont,
 		isFontListShown,
-		setIsFontListShown,
 		activeEditor,
-		fonts,
 	} = useContext(AppContext);
+
 	const fontListRef = useRef(null);
 	const [height, setHeight] = useState(window.innerHeight);
 	const [loadedFonts, setLoadedFonts] = useState(new Set());
@@ -21,7 +21,7 @@ export default function FontList() {
 	const [filteredFonts, setFilteredFonts] = useState(fontList);
 
 	const closeFontList = () => {
-		setIsFontListShown(false);
+		updateUiState({ isFontListShown: false });
 	};
 
 	const handleOutsideClick = (e) => {
@@ -47,10 +47,7 @@ export default function FontList() {
 	const handleFontClick = (e) => {
 		const fontName = e.currentTarget.textContent;
 		if (activeEditor) {
-			setFonts((prevFonts) => ({
-				...prevFonts,
-				[activeEditor]: fontName,
-			}));
+			updateEditorFont(activeEditor, fontName);
 		}
 	};
 

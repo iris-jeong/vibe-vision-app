@@ -1,16 +1,14 @@
 "use client";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { AppContext } from "@components/AppContext";
 import CircleEditor from "./CircleEditor";
 import CircleColor from "./CircleColor";
 
-export default function Circle({ color: initalColor = "#8b6ce0", colorIndex }) {
-	const { isPaletteOpen, colors } = useContext(AppContext);
-	const [color, setColor] = useState(colors[colorIndex]);
+export default function Circle({ color, colorIndex }) {
+	const { isPaletteOpen } = useContext(AppContext);
+	const [circleColor, setCircleColor] = useState(color);
 	const [showEditor, setShowEditor] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
-
-	// console.log("color: ", color, "with", colorIndex);
 
 	const toggleShowEditor = (status) => {
 		//Don't toggle the other editors' visibility if a color picker is open.
@@ -22,7 +20,9 @@ export default function Circle({ color: initalColor = "#8b6ce0", colorIndex }) {
 	return (
 		<div
 			className="color__container flex justify-center items-center relative pt-2 w-28 h-32 md:h-30 max-w-32"
-			onMouseEnter={() => toggleShowEditor(true)}
+			onMouseEnter={() => {
+				toggleShowEditor(true);
+			}}
 			onMouseLeave={() => toggleShowEditor(false)}
 		>
 			<div
@@ -35,14 +35,14 @@ export default function Circle({ color: initalColor = "#8b6ce0", colorIndex }) {
 				<CircleEditor
 					hoveredIcon={hoveredIcon}
 					setHoveredIcon={setHoveredIcon}
-					color={color}
+					color={circleColor}
 					colorIndex={colorIndex}
-					setColor={setColor}
+					setColor={setCircleColor}
 					showEditor={showEditor}
 					setShowEditor={setShowEditor}
 				/>
 			</div>
-			<CircleColor color={color} showEditor={showEditor} />
+			<CircleColor color={circleColor} showEditor={showEditor} />
 		</div>
 	);
 }

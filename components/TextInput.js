@@ -2,16 +2,11 @@ import React, { useEffect, useRef, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import { loadFont } from "@utils/functions";
 
-export default function TextInput({
-	defaultValue,
-	fontSize,
-	fontWeight,
-	lineHeight,
-	editorId,
-}) {
+export default function TextInput({ editor }) {
 	const textAreaRef = useRef(null);
 	const textAreaContainerRef = useRef(null);
-	const { colors, fonts } = useContext(AppContext);
+	const { colors } = useContext(AppContext);
+	const { content, fontFamily, fontSize, fontWeight, lineHeight } = editor;
 	const backgroundColor = colors[4];
 
 	const autoResize = () => {
@@ -25,8 +20,7 @@ export default function TextInput({
 	};
 
 	useEffect(() => {
-		console.log(fonts[editorId]);
-		loadFont(fonts[editorId]);
+		loadFont(editor.fontFamily);
 
 		window.addEventListener("resize", autoResize);
 		autoResize(textAreaRef.current, textAreaContainerRef.current); //Initial resize.
@@ -34,7 +28,7 @@ export default function TextInput({
 		return () => {
 			window.removeEventListener("resize", autoResize);
 		};
-	}, [fonts]);
+	}, [editor.fontFamily]);
 
 	return (
 		<div
@@ -48,10 +42,10 @@ export default function TextInput({
 					fontSize: fontSize,
 					fontWeight: fontWeight,
 					lineHeight: lineHeight,
-					fontFamily: fonts[editorId],
+					fontFamily: fontFamily,
 				}}
 				className={`w-full h-full border-0 py-0 pl-0 pr-2 border-none focus:outline-none resize-none`}
-				defaultValue={defaultValue}
+				defaultValue={content}
 				onChange={autoResize}
 			/>
 		</div>

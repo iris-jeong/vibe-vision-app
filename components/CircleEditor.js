@@ -11,12 +11,7 @@ export default function CircleEditor({
 	showEditor,
 	setShowEditor,
 }) {
-	const {
-		isPaletteOpen,
-		setIsPaletteOpen,
-		setIsNotificationShown,
-		setNotification,
-	} = useContext(AppContext);
+	const { updateUiState, uiState, isPaletteOpen } = useContext(AppContext);
 
 	const [isLocked, setIsLocked] = useState(false);
 	const sketchPickerRef = useRef(null);
@@ -35,22 +30,24 @@ export default function CircleEditor({
 					return;
 				} else if (lockIconRef.current?.contains(event.target)) {
 					//Click inside lock icon.
-					setIsPaletteOpen(false);
+					updateUiState({ isPaletteOpen: false });
 				} else {
 					// Close the color palette and editor.
-					setIsPaletteOpen(false);
+					updateUiState({ isPaletteOpen: false });
 					setShowEditor(false);
 				}
 			}
 		},
-		[setIsPaletteOpen, setShowEditor, showEditor]
+		[setShowEditor, updateUiState, showEditor]
 	);
 
-	const displayNotification = (type) => {
-		setIsNotificationShown(true);
-		setNotification(type);
+	const displayNotification = (type, item) => {
+		updateUiState({
+			isNotificationShown: true,
+			notification: { type: type, item: item },
+		});
 		setTimeout(() => {
-			setIsNotificationShown(false);
+			updateUiState({ isNotificationShown: false });
 		}, 2000);
 	};
 
@@ -59,21 +56,21 @@ export default function CircleEditor({
 		return () => {
 			document.removeEventListener("mousedown", handleOutsideClick);
 		};
-	}, [showEditor, handleOutsideClick]);
+	}, [showEditor, isPaletteOpen, handleOutsideClick]);
 
-	const handleIconClick = (type, event) => {
-		event?.stopPropagation();
+	const handleIconClick = (type) => {
 		switch (type) {
 			case "lock":
 				setIsLocked(!isLocked);
-				displayNotification("lock");
 				break;
 			case "copy":
 				copyToClipboard(color);
-				displayNotification("copy");
+				displayNotification(type, "color");
 				break;
 			case "palette":
-				setIsPaletteOpen(!isPaletteOpen);
+				updateUiState({ isPaletteOpen: !uiState.isPaletteOpen });
+				break;
+			default:
 				break;
 		}
 	};
