@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { useState, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import IconButton from "./IconButton";
-import { icon } from "@fortawesome/fontawesome-svg-core";
 
 export default function TextEditor({ editorId, editor }) {
 	const { updateEditorState, updateUiState, isFontListShown } =
