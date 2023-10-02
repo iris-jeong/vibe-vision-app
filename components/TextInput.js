@@ -44,7 +44,7 @@ export default function TextInput({ editor }) {
 					lineHeight: lineHeight,
 					fontFamily: fontFamily,
 				}}
-				className={`w-full h-full border-0 py-0 pl-0 pr-2 border-none focus:outline-none resize-none`}
+				className={`w-full h-full border-0 py-0 pl-0 lg:pr-2 border-none focus:outline-none resize-none`}
 				defaultValue={content}
 				onChange={autoResize}
 			/>

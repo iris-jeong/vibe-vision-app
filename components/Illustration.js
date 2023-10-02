@@ -72,8 +72,8 @@ export default function Illustration() {
 							style={{ backgroundColor: iconsCircle }}
 						>
 							<Image
-								src="icons/capital-a.svg"
-								alt="Uppercase letter A"
+								src="icons/font.svg"
+								alt="Font icon"
 								width={24}
 								height={24}
 							/>
@@ -85,7 +85,7 @@ export default function Illustration() {
 							<div className="icon">
 								<Image
 									src="icons/align-left.svg"
-									alt="Align left"
+									alt="Align left icon"
 									width={24}
 									height={24}
 								/>
@@ -98,7 +98,7 @@ export default function Illustration() {
 							<div className="icon">
 								<Image
 									src="icons/align-center.svg"
-									alt="Align center"
+									alt="Align center icon"
 									width={24}
 									height={24}
 								/>
@@ -111,7 +111,7 @@ export default function Illustration() {
 							<div className="icon">
 								<Image
 									src="icons/align-right.svg"
-									alt="Align right"
+									alt="Align right icon"
 									width={24}
 									height={24}
 								/>
