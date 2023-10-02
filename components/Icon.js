@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import { SketchPicker } from "react-color";
 import Image from "next/image";
+import Tooltip from "./Tooltip";
 
 export default function Icon({
 	type,
@@ -22,12 +23,6 @@ export default function Icon({
 		lock: isLocked ? "locked" : "unlocked",
 		copy: "copy",
 		palette: "color-palette",
-	};
-
-	const toolTip = {
-		lock: "Toggle lock",
-		copy: "Copy HEX",
-		palette: "Select color",
 	};
 
 	const srcPath =
@@ -56,13 +51,7 @@ export default function Icon({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 		>
-			<div
-				className={`tooltip z-20 rounded-full p-2 bg-slate-800 text-white flex justify-center text-center text-xs absolute inline-block w-24 -top-[36px] -left-[34px] ${
-					hoveredIcon === type ? "visible " : "hidden"
-				}`}
-			>
-				{toolTip[type]}
-			</div>
+			<Tooltip type={type} isVisible={hoveredIcon === type} />
 			<span ref={type === "lock" ? lockIconRef : null}>
 				<Image
 					className={`${type}-icon`}
