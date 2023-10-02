@@ -47,12 +47,12 @@ export default function TextEditor({ editorId, editor }) {
 				{["lock", "font"].map((iconType) => {
 					return (
 						<span
+							key={iconType}
 							className="relative px-1 md:px-2 cursor-pointer"
 							onMouseEnter={() => setHoveredIcon(iconType)}
 							onMouseLeave={() => setHoveredIcon(null)}
 						>
 							<IconButton
-								key={iconType}
 								type={iconType}
 								isHovered={hoveredIcon === iconType}
 								isLocked={isLocked}

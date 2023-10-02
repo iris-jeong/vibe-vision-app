@@ -91,7 +91,7 @@ export function AppProvider({ children }) {
 				setFontList(fetchedFonts);
 			})
 			.catch((error) => console.error("Error fetching fonts:", error));
-	}, []);
+	}, [apiKey]);
 
 	return (
 		<AppContext.Provider

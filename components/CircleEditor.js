@@ -47,7 +47,7 @@ export default function CircleEditor({
 		[setShowEditor, updateUiState, showEditor]
 	);
 
-	const displayNotification = useCallback((type, item) => {
+	const displayNotification = (type, item) => {
 		updateUiState({
 			isNotificationShown: true,
 			notification: { type: type, item: item },
@@ -55,7 +55,7 @@ export default function CircleEditor({
 		setTimeout(() => {
 			updateUiState({ isNotificationShown: false });
 		}, 2000);
-	});
+	};
 
 	useEffect(() => {
 		document.addEventListener("mousedown", handleOutsideClick);
@@ -86,12 +86,12 @@ export default function CircleEditor({
 			{["lock", "copy", "palette"].map((iconType) => {
 				return (
 					<div
+						key={iconType}
 						className={`icon__container cursor-pointer absolute ${iconPositions[iconType]} `}
 						onMouseEnter={() => setHoveredIcon(iconType)}
 						onMouseLeave={() => setHoveredIcon(null)}
 					>
 						<IconButton
-							key={iconType}
 							type={iconType}
 							isHovered={hoveredIcon === iconType}
 							onClick={() => handleIconClick(iconType)}
