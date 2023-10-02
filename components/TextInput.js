@@ -28,7 +28,7 @@ export default function TextInput({ editor }) {
 		return () => {
 			window.removeEventListener("resize", autoResize);
 		};
-	}, [editor.fontFamily]);
+	}, [fontFamily, fontSize]);
 
 	return (
 		<div

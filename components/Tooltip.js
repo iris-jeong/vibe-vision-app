@@ -4,6 +4,7 @@ export default function Tooltip({ type, isVisible }) {
 		copy: "Copy HEX",
 		palette: "Select color",
 		font: "Select font",
+		slider: "Resize font ",
 	};
 
 	return (

@@ -23,7 +23,7 @@ export default function Home() {
 		>
 			<DynamicFontList />
 			<Notification />
-			<section className="home pt-28 px-4 min-h-screen w-3/4 min-w-[500px] max-w-[1000px] flex flex-col justify-center items-center">
+			<section className="home pt-28 px-4 min-h-screen w-3/4 min-w-[500px] max-w-[1200px] flex flex-col justify-center items-center">
 				<div className="top__row mb-6 md:mb-9 1028px:mb-14 px-1 w-full h-1/5 min-h-[110px] max-h-28 flex justify-between md:justify-evenly">
 					{colors.map((color, index) => {
 						return (
@@ -42,7 +42,6 @@ export default function Home() {
 							return (
 								<Text
 									key={index}
-									editorId={editor.id}
 									editor={editors[index]}
 									{...editor}
 								/>

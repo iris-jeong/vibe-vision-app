@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import IconButton from "./IconButton";
+import RangeSlider from "./RangeSlider";
 
-export default function TextEditor({ editorId, editor }) {
+export default function TextEditor({ editor }) {
 	const { updateEditorState, updateUiState, isFontListShown } =
 		useContext(AppContext);
 
@@ -23,7 +24,7 @@ export default function TextEditor({ editorId, editor }) {
 			case "lock":
 				setIsLocked((prevState) => !prevState);
 			case "font":
-				updateEditorState({ activeEditor: editorId });
+				updateEditorState({ activeEditor: editor.id });
 				updateUiState({ isFontListShown: !isFontListShown });
 			default:
 				break;
@@ -40,13 +41,13 @@ export default function TextEditor({ editorId, editor }) {
 				{editor.fontFamily}
 			</div>
 			<div
-				className={`blue__container flex ${
+				className={`blue__container flex items-center ${
 					editorIsHovered ? "opacity-100 ml-2" : "opacity-0"
 				}`}
 			>
 				{["lock", "font"].map((iconType) => {
 					return (
-						<span
+						<div
 							key={iconType}
 							className="relative px-1 md:px-2 cursor-pointer"
 							onMouseEnter={() => setHoveredIcon(iconType)}
@@ -59,9 +60,19 @@ export default function TextEditor({ editorId, editor }) {
 								onClick={() => handleIconClick(iconType)}
 								iconRefs={iconRefs}
 							/>
-						</span>
+						</div>
 					);
 				})}
+				<div
+					onMouseEnter={() => setHoveredIcon("slider")}
+					onMouseLeave={() => setHoveredIcon(null)}
+				>
+					<RangeSlider
+						editorId={editor.id}
+						type="slider"
+						isHovered={hoveredIcon === "slider"}
+					/>
+				</div>
 			</div>
 		</div>
 	);
