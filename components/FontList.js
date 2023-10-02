@@ -32,7 +32,6 @@ export default function FontList() {
 
 	const handleFontChange = (e) => {
 		const searchValue = e.target.value;
-
 		setSearchedFont(searchValue);
 
 		const newFilteredFonts = fontList.filter((font) => {

@@ -14,7 +14,7 @@ export default function Notification() {
 
 	return (
 		<div
-			className={`bg-[#00BB51] w-fit py-4 px-6 fixed z-20 flex justify-center items-center rounded text-white ease-in-out duration-300 ${
+			className={`bg-[#00BB51] w-fit py-4 px-6 fixed z-30 flex justify-center items-center rounded text-white ease-in-out duration-300 ${
 				isNotificationShown
 					? "animate-slide-in-right transform translate-x-[-50%] inset-x-1/2 bottom-[50px] opacity-100"
 					: "animate-slide-out-right transform translate-x-[-50%] inset-x-1/2 bottom-[-50px] opacity-0"

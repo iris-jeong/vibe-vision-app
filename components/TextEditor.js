@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useState, useContext } from "react";
 import { AppContext } from "@components/AppContext";
+import IconButton from "./IconButton";
+import { icon } from "@fortawesome/fontawesome-svg-core";
 
 export default function TextEditor({ editorId, editor }) {
 	const { updateEditorState, updateUiState, isFontListShown } =
@@ -9,22 +11,25 @@ export default function TextEditor({ editorId, editor }) {
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
 	const [isLocked, setIsLocked] = useState(false);
-
-	const icons = {
-		lock: isLocked ? "locked" : "unlocked",
-		font: "capital-a",
+	const iconRefs = {
+		lock: null,
+		palette: null,
 	};
 
 	const toggleEditorVisibility = (status) => {
 		setEditorIsHovered(status);
 	};
 
-	const toggleLockIcon = () => {
-		setIsLocked((prevState) => !prevState);
-	};
-
-	const toggleFontListVisibility = (status) => {
-		updateUiState({ isFontListShown: status });
+	const handleIconClick = (type) => {
+		switch (type) {
+			case "lock":
+				setIsLocked((prevState) => !prevState);
+			case "font":
+				updateEditorState({ activeEditor: editorId });
+				updateUiState({ isFontListShown: !isFontListShown });
+			default:
+				break;
+		}
 	};
 
 	return (
@@ -41,39 +46,24 @@ export default function TextEditor({ editorId, editor }) {
 					editorIsHovered ? "opacity-100 ml-2" : "opacity-0"
 				}`}
 			>
-				<span className="px-1 md:px-2 cursor-pointer">
-					<Image
-						src={
-							hoveredIcon === "lock"
-								? `icons/${icons["lock"]}-hover.svg`
-								: `icons/${icons["lock"]}.svg`
-						}
-						alt="Lock icon"
-						width={24}
-						height={24}
-						onMouseEnter={() => setHoveredIcon("lock")}
-						onMouseLeave={() => setHoveredIcon(null)}
-						onClick={toggleLockIcon}
-					/>
-				</span>
-				<span className="relative mx-1 d:px-2 cursor-pointer">
-					<Image
-						src={
-							hoveredIcon === "font"
-								? "icons/capital-a-hover.svg"
-								: "icons/capital-a.svg"
-						}
-						alt="Font icon"
-						width={25}
-						height={25}
-						onMouseEnter={() => setHoveredIcon("font")}
-						onMouseLeave={() => setHoveredIcon(null)}
-						onClick={() => {
-							updateEditorState({ activeEditor: editorId });
-							toggleFontListVisibility(!isFontListShown);
-						}}
-					/>
-				</span>
+				{["lock", "font"].map((iconType) => {
+					return (
+						<span
+							className="relative px-1 md:px-2 cursor-pointer"
+							onMouseEnter={() => setHoveredIcon(iconType)}
+							onMouseLeave={() => setHoveredIcon(null)}
+						>
+							<IconButton
+								key={iconType}
+								type={iconType}
+								isHovered={hoveredIcon === iconType}
+								isLocked={isLocked}
+								onClick={() => handleIconClick(iconType)}
+								iconRefs={iconRefs}
+							/>
+						</span>
+					);
+				})}
 			</div>
 		</div>
 	);

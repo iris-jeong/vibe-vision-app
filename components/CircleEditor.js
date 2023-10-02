@@ -1,10 +1,8 @@
 import { useState, useRef, useEffect, useContext, useCallback } from "react";
 import { AppContext } from "@components/AppContext";
-import Icon from "./Icon";
+import IconButton from "./IconButton";
 
 export default function CircleEditor({
-	hoveredIcon,
-	setHoveredIcon,
 	color,
 	colorIndex,
 	setColor,
@@ -12,12 +10,20 @@ export default function CircleEditor({
 	setShowEditor,
 }) {
 	const { updateUiState, uiState, isPaletteOpen } = useContext(AppContext);
-
+	const [hoveredIcon, setHoveredIcon] = useState(null);
 	const [isLocked, setIsLocked] = useState(false);
 	const sketchPickerRef = useRef(null);
 	const editorRef = useRef(null);
 	const lockIconRef = useRef(null);
-
+	const iconRefs = {
+		lock: lockIconRef,
+		palette: sketchPickerRef,
+	};
+	const iconPositions = {
+		lock: "-left-1 top-1 md:top-0",
+		copy: "-top-2 md:-top-4 left-1/2 transform -translate-x-1/2 z-20",
+		palette: "-right-1 top-1 md:top-0",
+	};
 	const handleOutsideClick = useCallback(
 		(event) => {
 			if (showEditor) {
@@ -41,7 +47,7 @@ export default function CircleEditor({
 		[setShowEditor, updateUiState, showEditor]
 	);
 
-	const displayNotification = (type, item) => {
+	const displayNotification = useCallback((type, item) => {
 		updateUiState({
 			isNotificationShown: true,
 			notification: { type: type, item: item },
@@ -49,7 +55,7 @@ export default function CircleEditor({
 		setTimeout(() => {
 			updateUiState({ isNotificationShown: false });
 		}, 2000);
-	};
+	});
 
 	useEffect(() => {
 		document.addEventListener("mousedown", handleOutsideClick);
@@ -61,7 +67,7 @@ export default function CircleEditor({
 	const handleIconClick = (type) => {
 		switch (type) {
 			case "lock":
-				setIsLocked(!isLocked);
+				setIsLocked((prevState) => !prevState);
 				break;
 			case "copy":
 				copyToClipboard(color);
@@ -79,20 +85,23 @@ export default function CircleEditor({
 		<div ref={editorRef} className="editor ease-in-out">
 			{["lock", "copy", "palette"].map((iconType) => {
 				return (
-					<Icon
-						key={iconType}
-						type={iconType}
-						hoveredIcon={hoveredIcon}
+					<div
+						className={`icon__container cursor-pointer absolute ${iconPositions[iconType]} `}
 						onMouseEnter={() => setHoveredIcon(iconType)}
 						onMouseLeave={() => setHoveredIcon(null)}
-						onClick={(event) => handleIconClick(iconType, event)}
-						color={color}
-						colorIndex={colorIndex}
-						setColor={setColor}
-						isLocked={isLocked}
-						sketchPickerRef={sketchPickerRef}
-						lockIconRef={lockIconRef}
-					/>
+					>
+						<IconButton
+							key={iconType}
+							type={iconType}
+							isHovered={hoveredIcon === iconType}
+							onClick={() => handleIconClick(iconType)}
+							color={color}
+							colorIndex={colorIndex}
+							setColor={setColor}
+							isLocked={isLocked}
+							iconRefs={iconRefs}
+						/>
+					</div>
 				);
 			})}
 		</div>

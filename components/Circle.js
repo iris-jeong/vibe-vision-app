@@ -8,7 +8,6 @@ export default function Circle({ color, colorIndex }) {
 	const { isPaletteOpen } = useContext(AppContext);
 	const [circleColor, setCircleColor] = useState(color);
 	const [showEditor, setShowEditor] = useState(false);
-	const [hoveredIcon, setHoveredIcon] = useState(null);
 
 	const toggleShowEditor = (status) => {
 		//Don't toggle the other editors' visibility if a color picker is open.
@@ -33,8 +32,6 @@ export default function Circle({ color, colorIndex }) {
 				}`}
 			>
 				<CircleEditor
-					hoveredIcon={hoveredIcon}
-					setHoveredIcon={setHoveredIcon}
 					color={circleColor}
 					colorIndex={colorIndex}
 					setColor={setCircleColor}
