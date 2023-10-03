@@ -1,10 +1,11 @@
+"use client";
 import { useState, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import IconButton from "./IconButton";
 import RangeSlider from "./RangeSlider";
 
 export default function TextEditor({ editor }) {
-	const { updateEditorState, updateUiState, isFontListShown } =
+	const { updateEditorState, updateUiState, fontList, isFontListShown } =
 		useContext(AppContext);
 
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
@@ -19,13 +20,25 @@ export default function TextEditor({ editor }) {
 		setEditorIsHovered(status);
 	};
 
+	const downloadFont = (font) => {
+		const baseUrl = "https://fonts.google.com/specimen/";
+		const fontString = font.replaceAll(" ", "+");
+		const url = baseUrl + fontString;
+		window.open(url, "_blank");
+	};
+
 	const handleIconClick = (type) => {
 		switch (type) {
 			case "lock":
 				setIsLocked((prevState) => !prevState);
+				break;
 			case "font":
 				updateEditorState({ activeEditor: editor.id });
 				updateUiState({ isFontListShown: !isFontListShown });
+				break;
+			case "download":
+				downloadFont(editor.fontFamily);
+				break;
 			default:
 				break;
 		}
@@ -41,15 +54,26 @@ export default function TextEditor({ editor }) {
 				{editor.fontFamily}
 			</div>
 			<div
-				className={`blue__container flex items-center ${
+				className={`blue__container w-fit flex items-center ${
 					editorIsHovered ? "opacity-100 ml-2" : "opacity-0"
 				}`}
 			>
-				{["lock", "font"].map((iconType) => {
+				<div
+					className="purple__container py-2"
+					onMouseEnter={() => setHoveredIcon("slider")}
+					onMouseLeave={() => setHoveredIcon(null)}
+				>
+					<RangeSlider
+						editorId={editor.id}
+						type="slider"
+						isHovered={hoveredIcon === "slider"}
+					/>
+				</div>
+				{["lock", "font", "download"].map((iconType) => {
 					return (
 						<div
 							key={iconType}
-							className="relative px-1 md:px-2 cursor-pointer"
+							className="relative pl-2 md:lx-3 cursor-pointer"
 							onMouseEnter={() => setHoveredIcon(iconType)}
 							onMouseLeave={() => setHoveredIcon(null)}
 						>
@@ -63,16 +87,6 @@ export default function TextEditor({ editor }) {
 						</div>
 					);
 				})}
-				<div
-					onMouseEnter={() => setHoveredIcon("slider")}
-					onMouseLeave={() => setHoveredIcon(null)}
-				>
-					<RangeSlider
-						editorId={editor.id}
-						type="slider"
-						isHovered={hoveredIcon === "slider"}
-					/>
-				</div>
 			</div>
 		</div>
 	);

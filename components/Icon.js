@@ -16,6 +16,7 @@ export default function Icon({
 		copy: "copy",
 		palette: "color-palette",
 		font: "font",
+		download: "download",
 	};
 
 	const srcPath = isHovered

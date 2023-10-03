@@ -74,11 +74,15 @@ main {
 .buttons__container {
 	/* border: 3px solid yellow; */
 }
+
+.blue__container {
+	/* border: 3px solid blue; */
+}
 .green__container {
 	/* border: 1px solid green; */
 }
-.blue__container {
-	/* border: 3px solid blue; */
+.purple__container {
+	/* border: 1px solid var(--purple); */
 }
 .icons__container {
 }
