@@ -51,7 +51,7 @@ export function loadFont(fontName) {
 	} else {
 		WebFont.load({
 			google: {
-				families: [fontName],
+				families: [`${fontName}:400,700`],
 			},
 			fontDisplay: "swap",
 		});

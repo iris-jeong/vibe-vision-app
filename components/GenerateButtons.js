@@ -12,7 +12,7 @@ export default function GenerateButtons() {
 	};
 
 	return (
-		<div className="red__container w-full flex justify-around md:order-3">
+		<>
 			{["Colors", "Fonts"].map((button) => {
 				return (
 					<Button
@@ -27,6 +27,6 @@ export default function GenerateButtons() {
 					/>
 				);
 			})}
-		</div>
+		</>
 	);
 }

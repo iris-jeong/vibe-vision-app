@@ -9,7 +9,7 @@ export default function Button({ type, src, alt, onClick }) {
 		<div className="orange__container">
 			<button
 				style={{ backgroundColor: colors.primary, color: "#ffffff" }}
-				className="px-8 py-5 rounded-md font-semibold flex"
+				className="px-8 py-5 rounded-md font-semibold flex flex-wrap"
 				type="button"
 				onClick={onClick}
 			>

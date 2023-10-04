@@ -81,16 +81,9 @@ export function AppProvider({ children }) {
 				const fetchedFonts = data.items
 					.filter((item) => item.family !== "Molle")
 					.map((item) => {
-						const file =
-							item.files.regular ||
-							item.files.italic ||
-							item.files[300] ||
-							item.files[700];
-
 						return {
 							category: item.category,
 							family: item.family,
-							files: file,
 						};
 					});
 

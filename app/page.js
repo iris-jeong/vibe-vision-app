@@ -40,7 +40,7 @@ export default function Home() {
 					})}
 				</div>
 				{/* .top__row */}
-				<div className="red__container mb-20 w-full flex items-center flex-col 1028px:flex-row">
+				<div className="red__container w-full flex items-center flex-col 1028px:flex-row">
 					<div className="orange__container w-full 1028px:w-3/5 flex flex-col order-2 1028px:order-1">
 						{editors.map((editor, index) => {
 							return (
@@ -56,8 +56,10 @@ export default function Home() {
 						<Illustration />
 					</div>
 				</div>
+				<div className="red__container mt-10 md:mt-20 w-full flex justify-around md:order-3">
+					<GenerateButtons />
+				</div>
 
-				<GenerateButtons />
 				{/* .bottom__row */}
 			</section>
 		</div>
