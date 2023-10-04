@@ -60,6 +60,9 @@ main {
 .notification {
 	/* background-color: #2c9d30; */
 }
+.pink__container {
+	/* border: 3px solid pink; */
+}
 .red__container {
 	/* border: 3px solid red; */
 }
@@ -69,17 +72,11 @@ main {
 .yellow__container {
 	/* border: 3px solid yellow; */
 }
-.left-col,
-.right-col,
-.buttons__container {
-	/* border: 3px solid yellow; */
-}
-
-.blue__container {
-	/* border: 3px solid blue; */
-}
 .green__container {
 	/* border: 1px solid green; */
+}
+.blue__container {
+	/* border: 3px solid blue; */
 }
 .purple__container {
 	/* border: 1px solid var(--purple); */

@@ -27,8 +27,8 @@ export default function Home() {
 		>
 			<DynamicFontList />
 			<Notification />
-			<section className="home pt-28 px-4 min-h-screen w-3/4 min-w-[500px] max-w-[1200px] flex flex-col justify-center items-center">
-				<div className="top__row mb-6 md:mb-9 1028px:mb-14 px-1 w-full h-1/5 min-h-[110px] max-h-28 flex justify-between md:justify-evenly">
+			<section className="pink__container home pt-28 px-6 md:px-0 min-h-screen w-3/4 min-w-[500px] max-w-[1200px] flex flex-col justify-center items-center">
+				<div className="red__container mb-4 md:mb-7 1028px:mb-12 px-1 w-full min-h-[110px] max-h-30 flex justify-between md:justify-evenly">
 					{Object.values(colors).map((color, index) => {
 						return (
 							<Circle
@@ -40,7 +40,7 @@ export default function Home() {
 					})}
 				</div>
 				{/* .top__row */}
-				<div className="bottom__row red__container mb-20 w-full flex items-center flex-col 1028px:flex-row">
+				<div className="red__container mb-20 w-full flex items-center flex-col 1028px:flex-row">
 					<div className="orange__container w-full 1028px:w-3/5 flex flex-col order-2 1028px:order-1">
 						{editors.map((editor, index) => {
 							return (
@@ -56,9 +56,8 @@ export default function Home() {
 						<Illustration />
 					</div>
 				</div>
-				<div className="yellow__container w-full">
-					<GenerateButtons />
-				</div>
+
+				<GenerateButtons />
 				{/* .bottom__row */}
 			</section>
 		</div>

@@ -24,7 +24,7 @@ export function AppProvider({ children }) {
 				content: "Curated colors and paired fonts in context.",
 				fontFamily: "IBM Plex Sans",
 				fontSize: "46px",
-				fontWeight: "600",
+				fontWeight: "700",
 				lineHeight: "1.1",
 			},
 			{

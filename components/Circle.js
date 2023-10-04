@@ -18,7 +18,7 @@ export default function Circle({ color, colorIndex }) {
 
 	return (
 		<div
-			className="color__container flex justify-center items-center relative pt-2 w-28 h-32 md:h-30 max-w-32"
+			className="orange__container relative pt-2 w-28 h-32 md:h-30 max-w-32 flex justify-center items-center"
 			onMouseEnter={() => {
 				toggleShowEditor(true);
 			}}

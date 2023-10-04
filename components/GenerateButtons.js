@@ -1,51 +1,32 @@
-import { useContext } from "react";
-import { AppContext } from "@components/AppContext";
-import Image from "next/image";
+import Button from "./Button";
 
 export default function GenerateButtons() {
-	const { colors } = useContext(AppContext);
-	const backgroundColor = colors.primary;
-
-	const handleGeneratePalette = () => {
+	const generatePalette = () => {
+		console.log("generating palette");
 		//Generate a random color palette.
 		//Update the app context colors.
 	};
 
+	const generateFonts = () => {
+		console.log("generating fonts");
+	};
+
 	return (
-		<div className="buttons__container w-full flex justify-around md:order-3">
-			<div className="button__container">
-				<button
-					style={{ backgroundColor: backgroundColor }}
-					className="px-8 py-5 rounded-md text-white font-semibold flex"
-					type="button"
-					onClick={handleGeneratePalette}
-				>
-					Swap
-					<Image
-						className="mx-2"
+		<div className="red__container w-full flex justify-around md:order-3">
+			{["Colors", "Fonts"].map((button) => {
+				return (
+					<Button
+						type={button}
 						src="icons/swap-white.svg"
-						width={24}
-						height={24}
+						alt={`Swap ${button}`}
+						onClick={
+							button === "Colors"
+								? generatePalette
+								: generateFonts
+						}
 					/>
-					Colors
-				</button>
-			</div>
-			<div className="green__container">
-				<button
-					style={{ backgroundColor: backgroundColor }}
-					className="px-8 py-5 rounded-md text-white font-semibold flex"
-					type="button"
-				>
-					Swap
-					<Image
-						className="mx-2"
-						src={"icons/swap-white.svg"}
-						width={24}
-						height={24}
-					/>
-					Fonts
-				</button>
-			</div>
+				);
+			})}
 		</div>
 	);
 }
