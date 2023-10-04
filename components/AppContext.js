@@ -9,7 +9,13 @@ export function AppProvider({ children }) {
 	const [fontList, setFontList] = useState([]);
 
 	const [editorState, setEditorState] = useState({
-		colors: ["#8b6ce0", "#e3f6f5", "#bAe8e8", "#ffd803", "#faebd7"],
+		colors: {
+			primary: "#8b6ce0",
+			secondary: "#e3f6f5",
+			accent1: "#bAe8e8",
+			accent2: "#ffd803",
+			background: "#faebd7",
+		},
 		activeEditor: null,
 		editors: [
 			{

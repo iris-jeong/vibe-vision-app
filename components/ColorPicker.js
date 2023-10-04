@@ -8,10 +8,10 @@ export default function ColorPicker({ iconRefs, color, colorIndex, setColor }) {
 	const handleColorChange = useCallback(
 		(color) => {
 			setColor(color.hex);
+			const keys = Object.keys(colors);
 
-			const updatedColors = colors.map((existingColor, i) => {
-				return i === colorIndex ? color.hex : existingColor;
-			});
+			const updatedColors = { ...colors };
+			updatedColors[keys[colorIndex]] = color.hex;
 
 			updateEditorState({ colors: updatedColors });
 		},

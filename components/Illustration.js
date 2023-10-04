@@ -7,11 +7,11 @@ import Image from "next/image";
 export default function Illustration() {
 	const { colors } = useContext(AppContext);
 
-	const sunRectangleCircle = colors[0];
-	const screenCircle = colors[1];
-	const rectangle = colors[2];
-	const iconsCircle = colors[3];
-	const sunOutline = generateShade(hexToRgba(colors[0], 1.0), "lighter");
+	const sunRectangleCircle = colors.primary;
+	const screenCircle = colors.secondary;
+	const rectangle = colors.accent1;
+	const iconsCircle = colors.accent2;
+	const sunOutline = generateShade(hexToRgba(colors.primary, 1.0), "lighter");
 	return (
 		<aside className="w-full px-6 md:px-0">
 			<div className="header" style={{ backgroundColor: screenCircle }}>

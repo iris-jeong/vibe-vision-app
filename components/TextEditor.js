@@ -5,7 +5,7 @@ import IconButton from "./IconButton";
 import RangeSlider from "./RangeSlider";
 
 export default function TextEditor({ editor }) {
-	const { updateEditorState, updateUiState, fontList, isFontListShown } =
+	const { updateEditorState, updateUiState, isFontListShown } =
 		useContext(AppContext);
 
 	const [editorIsHovered, setEditorIsHovered] = useState(false);

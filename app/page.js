@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { AppContext } from "@components/AppContext";
 import Notification from "@components/Notification";
@@ -14,7 +14,11 @@ const DynamicFontList = dynamic(() => import("@components/FontList"), {
 
 export default function Home() {
 	const { colors, editors } = useContext(AppContext);
-	const backgroundColor = colors[4];
+	const backgroundColor = colors.background;
+
+	useEffect(() => {
+		document.querySelector("body").style.backgroundColor = backgroundColor;
+	}, []);
 
 	return (
 		<div
@@ -25,7 +29,7 @@ export default function Home() {
 			<Notification />
 			<section className="home pt-28 px-4 min-h-screen w-3/4 min-w-[500px] max-w-[1200px] flex flex-col justify-center items-center">
 				<div className="top__row mb-6 md:mb-9 1028px:mb-14 px-1 w-full h-1/5 min-h-[110px] max-h-28 flex justify-between md:justify-evenly">
-					{colors.map((color, index) => {
+					{Object.values(colors).map((color, index) => {
 						return (
 							<Circle
 								key={index}

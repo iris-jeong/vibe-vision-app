@@ -1,6 +1,7 @@
 import chroma from "chroma-js";
 
 export function hexToRgba(hex, opacity) {
+	console.log("hex", hex);
 	hex = hex.replace("#", "");
 	const r = parseInt(hex.substring(0, 2), 16);
 	const g = parseInt(hex.substring(2, 4), 16);
@@ -12,9 +13,9 @@ export function hexToRgba(hex, opacity) {
 export function generateShade(hexColor, shade) {
 	let color;
 	if (shade === "lighter") {
-		color = chroma(hexColor).brighten(1).hex();
+		color = chroma(hexColor).brighten(0.8).hex();
 	} else {
-		color = chroma(hexColor).darken(1).hex();
+		color = chroma(hexColor).darken(0.5).hex();
 	}
 	return color;
 }
