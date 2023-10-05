@@ -16,6 +16,7 @@ export default function GenerateButtons() {
 			{["Colors", "Fonts"].map((button) => {
 				return (
 					<Button
+						key={button}
 						type={button}
 						src="icons/swap-white.svg"
 						alt={`Swap ${button}`}

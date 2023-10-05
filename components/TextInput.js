@@ -20,10 +20,10 @@ export default function TextInput({ editor }) {
 	};
 
 	useEffect(() => {
-		loadFont(editor.fontFamily);
+		loadFont(fontFamily);
 
 		window.addEventListener("resize", autoResize);
-		autoResize(textAreaRef.current, textAreaContainerRef.current); //Initial resize.
+		autoResize(); //Initial resize.
 
 		return () => {
 			window.removeEventListener("resize", autoResize);
