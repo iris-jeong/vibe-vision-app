@@ -8,6 +8,7 @@ export default function Circle({ color, colorIndex }) {
 	const { isPaletteOpen } = useContext(AppContext);
 	const [circleColor, setCircleColor] = useState(color);
 	const [showEditor, setShowEditor] = useState(false);
+	const circleColorRef = useRef(null);
 
 	const toggleShowEditor = (status) => {
 		//Don't toggle the other editors' visibility if a color picker is open.
@@ -37,9 +38,14 @@ export default function Circle({ color, colorIndex }) {
 					setColor={setCircleColor}
 					showEditor={showEditor}
 					setShowEditor={setShowEditor}
+					circleColorRef={circleColorRef}
 				/>
 			</div>
-			<CircleColor color={circleColor} showEditor={showEditor} />
+			<CircleColor
+				circleColorRef={circleColorRef}
+				color={circleColor}
+				showEditor={showEditor}
+			/>
 		</div>
 	);
 }

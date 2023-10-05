@@ -8,6 +8,7 @@ export default function CircleEditor({
 	setColor,
 	showEditor,
 	setShowEditor,
+	circleColorRef,
 }) {
 	const { updateUiState, uiState, isPaletteOpen } = useContext(AppContext);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
@@ -18,6 +19,7 @@ export default function CircleEditor({
 	const iconRefs = {
 		lock: lockIconRef,
 		palette: sketchPickerRef,
+		circle: circleColorRef,
 	};
 	const iconPositions = {
 		lock: "-left-1 top-1 md:top-0",
@@ -29,6 +31,7 @@ export default function CircleEditor({
 			if (showEditor) {
 				//If the user clicked inside of the color palette, do nothing.
 				if (
+					circleColorRef.current?.contains(event.target) || // Clicked inside the circle.
 					sketchPickerRef.current?.contains(event.target) || //Clicked inside the sketch picker.
 					(editorRef.current?.contains(event.target) &&
 						!lockIconRef.current?.contains(event.target)) //Clicked on either copy or palette icon.
