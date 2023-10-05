@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { AppContext } from "@components/AppContext";
 import CircleEditor from "./CircleEditor";
 import CircleColor from "./CircleColor";
@@ -16,6 +16,10 @@ export default function Circle({ color, colorIndex }) {
 			setShowEditor(status);
 		}
 	};
+
+	useEffect(() => {
+		setCircleColor(color);
+	}, [color]);
 
 	return (
 		<div

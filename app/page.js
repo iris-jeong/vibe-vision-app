@@ -18,7 +18,7 @@ export default function Home() {
 
 	useEffect(() => {
 		document.querySelector("body").style.backgroundColor = backgroundColor;
-	}, []);
+	}, [backgroundColor]);
 
 	return (
 		<div
@@ -32,6 +32,7 @@ export default function Home() {
 					{Object.values(colors).map((color, index) => {
 						return (
 							<Circle
+								// key={`${color}-${index}`}
 								key={index}
 								colorIndex={index}
 								color={color}
@@ -45,6 +46,7 @@ export default function Home() {
 						{editors.map((editor, index) => {
 							return (
 								<Text
+									// key={`${editor}-${index}`}
 									key={index}
 									editor={editors[index]}
 									{...editor}
