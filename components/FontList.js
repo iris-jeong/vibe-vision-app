@@ -134,15 +134,21 @@ export default function FontList() {
 					/>
 				</div>
 				<div className="fontsList bg-[#fafafa]">
-					<List
-						height={height}
-						itemCount={filteredFonts.length}
-						itemSize={35}
-						width={300}
-						overscanCount={50}
-					>
-						{Row}
-					</List>
+					{filteredFonts.length > 0 ? (
+						<List
+							height={height}
+							itemCount={filteredFonts.length}
+							itemSize={35}
+							width={300}
+							overscanCount={50}
+						>
+							{Row}
+						</List>
+					) : (
+						<div className="text-center py-4 text-lg text-[#383838]">
+							No fonts found.
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
