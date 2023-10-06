@@ -15,12 +15,24 @@ export default function TextInput({ editor }) {
 
 		// Reset the height to 'auto' before calculating the scrollHeight
 		textArea.style.height = "auto";
-		textArea.style.height = `${textArea.scrollHeight}px`;
-		textAreaContainer.style.height = `${textArea.scrollHeight}px`;
+
+		const additionalPadding = 2;
+		textArea.style.height = `${
+			textArea.scrollHeight + additionalPadding
+		}px`;
+		textAreaContainer.style.height = `${
+			textArea.scrollHeight + additionalPadding
+		}px`;
 	};
 
 	useEffect(() => {
-		loadFont(fontFamily);
+		loadFont(fontFamily)
+			.then(() => {
+				autoResize();
+			})
+			.catch((error) => {
+				console.error("Could not load font:", error);
+			});
 
 		window.addEventListener("resize", autoResize);
 		autoResize(); //Initial resize.
@@ -44,7 +56,7 @@ export default function TextInput({ editor }) {
 					lineHeight: lineHeight,
 					fontFamily: fontFamily,
 				}}
-				className={`w-full h-full border-0 py-0 pl-0 lg:pr-2 border-none focus:outline-none resize-none`}
+				className={`w-full h-full border-0 py-0 px-3 border-none focus:outline-none resize-none`}
 				defaultValue={content}
 				onChange={autoResize}
 			/>

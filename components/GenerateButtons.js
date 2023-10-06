@@ -2,14 +2,16 @@ import { useContext } from "react";
 import { AppContext } from "./AppContext";
 import { generateColorPalette, hasGoodContrast } from "@utils/generatePalette";
 import Button from "./Button";
+import generateFontPairing from "@utils/generateFontPairing";
 
 export default function GenerateButtons() {
-	const { colors, updateEditorState } = useContext(AppContext);
+	const { colors, editors, updateEditorState, fontCategories } =
+		useContext(AppContext);
 
 	const generatePalette = () => {
-		console.log("generating palette");
 		//Generate a random color palette.
 		const palette = generateColorPalette();
+
 		//Update the app context colors.
 		let updatedColors = { ...colors };
 		Object.keys(updatedColors).map((color, i) => {
@@ -19,7 +21,16 @@ export default function GenerateButtons() {
 	};
 
 	const generateFonts = () => {
-		console.log("generating fonts");
+		//Generate a random font pairing.
+		const fontPair = generateFontPairing(fontCategories);
+		console.log(fontPair);
+		//Update the app context editor font families.
+		let updatedEditors = editors;
+		updatedEditors.forEach((editor, i) => {
+			editor["fontFamily"] = fontPair[i].family;
+		});
+		console.log("updated editors", updatedEditors);
+		updateEditorState({ editors: updatedEditors });
 	};
 
 	return (

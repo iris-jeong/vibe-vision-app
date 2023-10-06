@@ -151,9 +151,7 @@ function getContrastRatio(color1, color2) {
 export function hasGoodContrast(color1, color2, minimumContrast = 3.3) {
 	const rgb1 = hexToRgb(color1);
 	const rgb2 = hexToRgb(color2);
-	console.log("min contrast", minimumContrast);
-	console.log("contrast", getContrastRatio(rgb1, rgb2));
-	console.log(getContrastRatio(rgb1, rgb2), ">=", minimumContrast, "?");
+	// console.log(getContrastRatio(rgb1, rgb2), ">=", minimumContrast, "?");
 	return getContrastRatio(rgb1, rgb2) >= minimumContrast;
 }
 

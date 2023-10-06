@@ -50,7 +50,7 @@ export default function TextEditor({ editor }) {
 			onMouseEnter={() => toggleEditorVisibility(true)}
 			onMouseLeave={() => toggleEditorVisibility(false)}
 		>
-			<div className="blue__container text-sm w-fit">
+			<div className="blue__container text-sm w-fit pl-3">
 				{editor.fontFamily}
 			</div>
 			<div
@@ -73,7 +73,7 @@ export default function TextEditor({ editor }) {
 					return (
 						<div
 							key={iconType}
-							className="relative pl-2 md:lx-3 cursor-pointer"
+							className="relative pl-2 md:pl-3 cursor-pointer"
 							onMouseEnter={() => setHoveredIcon(iconType)}
 							onMouseLeave={() => setHoveredIcon(null)}
 						>

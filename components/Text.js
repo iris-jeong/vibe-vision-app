@@ -3,7 +3,7 @@ import TextInput from "./TextInput";
 
 export default function Text({ editor }) {
 	return (
-		<div className="yellow__container w-full mt-2 mb-0 pr-5">
+		<div className="yellow__container w-full mb-0">
 			<TextEditor editor={editor} />
 			<TextInput editor={editor} />
 		</div>

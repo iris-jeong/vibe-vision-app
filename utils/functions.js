@@ -20,40 +20,46 @@ export function generateShade(hexColor, shade) {
 }
 
 export function loadFont(fontName) {
-	const WebFont = require("webfontloader");
-	if (fontName === "Buda") {
-		WebFont.load({
-			custom: {
+	return new Promise((resolve, reject) => {
+		const WebFont = require("webfontloader");
+
+		const config = {
+			fontactive: (familyName, fvd) => {
+				resolve();
+			},
+			fontinactive: (familyName, fvd) => {
+				reject(new Error(`Font ${familyName} could not be loaded`));
+			},
+		};
+
+		if (fontName === "Buda") {
+			config.custom = {
 				families: ["Buda"],
 				urls: [
 					"https://fonts.googleapis.com/css2?family=Buda:wght@300",
 				],
-			},
-		});
-	} else if (fontName === "Sunflower") {
-		WebFont.load({
-			custom: {
+			};
+		} else if (fontName === "Sunflower") {
+			config.custom = {
 				families: ["Sunflower"],
 				urls: [
 					"https://fonts.googleapis.com/css2?family=Sunflower:wght@300",
 				],
-			},
-		});
-	} else if (fontName === "UnifrakturCook") {
-		WebFont.load({
-			custom: {
+			};
+		} else if (fontName === "UnifrakturCook") {
+			config.custom = {
 				families: ["UnifrakturCook"],
 				urls: [
 					"https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700",
 				],
-			},
-		});
-	} else {
-		WebFont.load({
-			google: {
+			};
+		} else {
+			config.google = {
 				families: [`${fontName}:400,700`],
-			},
-			fontDisplay: "swap",
-		});
-	}
+			};
+			config.fontDisplay = "swap";
+		}
+
+		WebFont.load(config);
+	});
 }

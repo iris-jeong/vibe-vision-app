@@ -7,7 +7,12 @@ export const AppContext = createContext();
 export function AppProvider({ children }) {
 	const apiKey = process.env.NEXT_PUBLIC_GOOGLE_FONTS_API_KEY;
 	const [fontList, setFontList] = useState([]);
-
+	const [serifFonts, setSerifFonts] = useState([]);
+	const [sansSerifFonts, setSansSerifFonts] = useState([]);
+	const [displayFonts, setDisplayFonts] = useState([]);
+	const [handwritingFonts, setHandwritingFonts] = useState([]);
+	const [monospaceFonts, setMonospaceFonts] = useState([]);
+	const [fontCategories, setFontCategories] = useState([]);
 	const [editorState, setEditorState] = useState({
 		colors: {
 			primary: "#8b6ce0",
@@ -25,7 +30,7 @@ export function AppProvider({ children }) {
 				fontFamily: "IBM Plex Sans",
 				fontSize: "46px",
 				fontWeight: "700",
-				lineHeight: "1.1",
+				lineHeight: "normal",
 			},
 			{
 				id: "editor2",
@@ -35,7 +40,7 @@ export function AppProvider({ children }) {
 				fontFamily: "Inter",
 				fontSize: "16px",
 				fontWeight: "400",
-				lineHeight: "1.5",
+				lineHeight: "normal",
 			},
 		],
 	});
@@ -78,6 +83,12 @@ export function AppProvider({ children }) {
 		fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}`)
 			.then((response) => response.json())
 			.then((data) => {
+				let serifs = [];
+				let sansSerifs = [];
+				let displays = [];
+				let handwritings = [];
+				let monospaces = [];
+
 				const fetchedFonts = data.items
 					.filter(
 						(item) =>
@@ -86,16 +97,62 @@ export function AppProvider({ children }) {
 							item.family !== "Flow Block" &&
 							item.family !== "Flow Circular" &&
 							item.family !== "Wavefont" &&
-							!item.family.toLowerCase().includes("barcode")
+							item.family !== "Redacted" &&
+							item.family !== "Noto Color Emoji" &&
+							item.family !== "Noto Emoji" &&
+							item.family !== "Noto Kufi Arabic" &&
+							item.family !== "Noto Music" &&
+							item.family !== "Noto Naskh Arabic" &&
+							item.family !== "Noto Nastaliq Urdu" &&
+							item.family !== "Noto Rashi Hebrew" &&
+							!item.family.toLowerCase().includes("noto sans") &&
+							!item.family.toLowerCase().includes("barcode") &&
+							!item.family
+								.toLowerCase()
+								.includes("material icons")
 					)
 					.map((item) => {
+						// const itemInfo = {
+						// 	category: item.category,
+						// 	family: item.family,
+						// };
+						switch (item.category) {
+							case "serif":
+								serifs.push(item);
+								break;
+							case "sans-serif":
+								sansSerifs.push(item);
+								break;
+							case "display":
+								displays.push(item);
+								break;
+							case "handwriting":
+								handwritings.push(item);
+								break;
+							case "monospace":
+								monospaces.push(item);
+								break;
+							default:
+								break;
+						}
 						return {
 							category: item.category,
 							family: item.family,
 						};
 					});
-
+				setSerifFonts(serifs);
+				setSansSerifFonts(sansSerifs);
+				setDisplayFonts(displays);
+				setHandwritingFonts(handwritings);
+				setMonospaceFonts(monospaces);
 				setFontList(fetchedFonts);
+				setFontCategories([
+					serifs,
+					sansSerifs,
+					displays,
+					handwritings,
+					monospaces,
+				]);
 			})
 			.catch((error) => console.error("Error fetching fonts:", error));
 	}, [apiKey]);
@@ -110,6 +167,7 @@ export function AppProvider({ children }) {
 				updateUiState,
 				updateEditorState,
 				updateEditorFont,
+				fontCategories,
 			}}
 		>
 			{children}
