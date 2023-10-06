@@ -79,7 +79,15 @@ export function AppProvider({ children }) {
 			.then((response) => response.json())
 			.then((data) => {
 				const fetchedFonts = data.items
-					.filter((item) => item.family !== "Molle")
+					.filter(
+						(item) =>
+							item.family !== "Molle" &&
+							item.family !== "Flow Rounded" &&
+							item.family !== "Flow Block" &&
+							item.family !== "Flow Circular" &&
+							item.family !== "Wavefont" &&
+							!item.family.toLowerCase().includes("barcode")
+					)
 					.map((item) => {
 						return {
 							category: item.category,
