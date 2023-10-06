@@ -1,14 +1,10 @@
-import { useContext } from "react";
-import { AppContext } from "@components/AppContext";
 import Image from "next/image";
 
-export default function Button({ type, src, alt, onClick }) {
-	const { colors } = useContext(AppContext);
-
+export default function Button({ style, type, src, alt, onClick }) {
 	return (
 		<div className="orange__container">
 			<button
-				style={{ backgroundColor: colors.primary, color: "#ffffff" }}
+				style={style}
 				className="px-8 py-5 rounded-md font-semibold flex flex-wrap"
 				type="button"
 				onClick={onClick}

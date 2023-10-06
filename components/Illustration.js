@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import { hexToRgba, generateShade } from "@utils/functions";
+import { hasGoodContrast } from "@utils/generatePalette";
 import "@styles/illustration.css";
 import Image from "next/image";
 
@@ -12,6 +13,7 @@ export default function Illustration() {
 	const rectangle = colors.accent1;
 	const iconsCircle = colors.accent2;
 	const sunOutline = generateShade(hexToRgba(colors.primary, 1.0), "lighter");
+
 	return (
 		<aside className="w-full px-6 md:px-0">
 			<div className="header" style={{ backgroundColor: screenCircle }}>
@@ -20,7 +22,7 @@ export default function Illustration() {
 				<div className="header-buttons button3"></div>
 			</div>
 			<div className="screen" style={{ backgroundColor: screenCircle }}>
-				<div className="sun">
+				{/* <div className="sun">
 					<div
 						className="sun-outline"
 						style={{ backgroundColor: sunRectangleCircle }}
@@ -29,7 +31,13 @@ export default function Illustration() {
 							className="sun-circle"
 							style={{ backgroundColor: sunOutline }}
 						></div>
-						<div className="eyes"></div>
+						<div
+							className={
+								hasGoodContrast(sunOutline, "#000000")
+									? "eyes"
+									: "eyes-light"
+							}
+						></div>
 						<div
 							className="cheeks"
 							style={{
@@ -37,9 +45,15 @@ export default function Illustration() {
 								boxShadow: `22px 0px 0px ${sunRectangleCircle}`,
 							}}
 						></div>
-						<div className="smile"></div>
+						<div
+							className={
+								hasGoodContrast(sunOutline, "#000000")
+									? "smile"
+									: "smile-light"
+							}
+						></div>
 					</div>
-				</div>
+				</div> */}
 				{/* .sun */}
 
 				<div className="inner-screen">
@@ -68,23 +82,35 @@ export default function Illustration() {
 
 					<div className="text-editor">
 						<div
-							className="icon-container"
+							className="icon-container border border-[#383838] border-2"
 							style={{ backgroundColor: iconsCircle }}
 						>
 							<Image
-								src="icons/font.svg"
+								src={`icons/font${
+									hasGoodContrast(iconsCircle, "#383838", 2.7)
+										? ""
+										: "-white"
+								}.svg`}
 								alt="Font icon"
 								width={24}
 								height={24}
 							/>
 						</div>
 						<div
-							className="icon-container"
+							className="icon-container border border-[#383838] border-2"
 							style={{ backgroundColor: iconsCircle }}
 						>
 							<div className="icon">
 								<Image
-									src="icons/align-left.svg"
+									src={`icons/align-left${
+										hasGoodContrast(
+											iconsCircle,
+											"#383838",
+											2.7
+										)
+											? ""
+											: "-white"
+									}.svg`}
 									alt="Align left icon"
 									width={24}
 									height={24}
@@ -92,12 +118,20 @@ export default function Illustration() {
 							</div>
 						</div>
 						<div
-							className="icon-container"
+							className="icon-container border border-[#383838] border-2"
 							style={{ backgroundColor: iconsCircle }}
 						>
 							<div className="icon">
 								<Image
-									src="icons/align-center.svg"
+									src={`icons/align-center${
+										hasGoodContrast(
+											iconsCircle,
+											"#383838",
+											2.7
+										)
+											? ""
+											: "-white"
+									}.svg`}
 									alt="Align center icon"
 									width={24}
 									height={24}
@@ -105,12 +139,20 @@ export default function Illustration() {
 							</div>
 						</div>
 						<div
-							className="icon-container"
+							className="icon-container border border-[#383838] border-2"
 							style={{ backgroundColor: iconsCircle }}
 						>
 							<div className="icon">
 								<Image
-									src="icons/align-right.svg"
+									src={`icons/align-right${
+										hasGoodContrast(
+											iconsCircle,
+											"#383838",
+											2.7
+										)
+											? ""
+											: "-white"
+									}.svg`}
 									alt="Align right icon"
 									width={24}
 									height={24}
@@ -122,15 +164,39 @@ export default function Illustration() {
 
 					<div className="extras">
 						<div
-							className="circle extras-circle1"
+							className={`${
+								hasGoodContrast(
+									sunRectangleCircle,
+									"#383838",
+									2.9
+								)
+									? "circle"
+									: "circle-light"
+							} extras-circle1`}
 							style={{ backgroundColor: sunRectangleCircle }}
 						></div>
 						<div
-							className="circle extras-circle2"
+							className={`${
+								hasGoodContrast(
+									sunRectangleCircle,
+									"#383838",
+									2.9
+								)
+									? "circle"
+									: "circle-light"
+							} extras-circle2`}
 							style={{ backgroundColor: iconsCircle }}
 						></div>
 						<div
-							className="circle extras-circle3"
+							className={`${
+								hasGoodContrast(
+									sunRectangleCircle,
+									"#383838",
+									2.9
+								)
+									? "circle"
+									: "circle-light"
+							} extras-circle3`}
 							style={{ backgroundColor: screenCircle }}
 						></div>
 					</div>

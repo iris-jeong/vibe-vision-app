@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "./AppContext";
-import { generateColorPalette } from "@utils/generatePalette";
+import { generateColorPalette, hasGoodContrast } from "@utils/generatePalette";
 import Button from "./Button";
 
 export default function GenerateButtons() {
@@ -29,7 +29,17 @@ export default function GenerateButtons() {
 					<Button
 						key={button}
 						type={button}
-						src="icons/swap-white.svg"
+						style={{
+							backgroundColor: colors.primary,
+							color: hasGoodContrast(colors.primary, "#ffffff")
+								? "#ffffff"
+								: "#383838",
+						}}
+						src={
+							hasGoodContrast(colors.primary, "#ffffff")
+								? "icons/swap-white.svg"
+								: "icons/swap.svg"
+						}
 						alt={`Swap ${button}`}
 						onClick={
 							button === "Colors"
