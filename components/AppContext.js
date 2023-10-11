@@ -15,12 +15,13 @@ export function AppProvider({ children }) {
 	const [fontCategories, setFontCategories] = useState([]);
 	const [editorState, setEditorState] = useState({
 		colors: {
-			primary: "#8b6ce0",
-			secondary: "#e3f6f5",
-			accent1: "#bAe8e8",
-			accent2: "#ffd803",
-			background: "#faebd7",
+			primary: { value: "#8b6ce0", locked: false },
+			secondary: { value: "#e3f6f5", locked: false },
+			accent1: { value: "#bAe8e8", locked: false },
+			accent2: { value: "#ffd803", locked: false },
+			background: { value: "#faebd7", locked: false },
 		},
+
 		activeEditor: null,
 		editors: [
 			{
@@ -31,6 +32,7 @@ export function AppProvider({ children }) {
 				fontSize: "46px",
 				fontWeight: "700",
 				lineHeight: "normal",
+				locked: false,
 			},
 			{
 				id: "editor2",
@@ -41,6 +43,7 @@ export function AppProvider({ children }) {
 				fontSize: "16px",
 				fontWeight: "400",
 				lineHeight: "normal",
+				locked: false,
 			},
 		],
 	});
@@ -64,6 +67,18 @@ export function AppProvider({ children }) {
 			...prevState,
 			...updatedProperties,
 		}));
+	};
+
+	const updateColorValue = (colorKey, newColorValue) => {
+		setEditorState((prevState) => {
+			const updatedColors = { ...prevState.colors };
+
+			if (updatedColors[colorKey]) {
+				updatedColors[colorKey].value = newColorValue;
+			}
+
+			return { ...prevState, colors: updatedColors };
+		});
 	};
 
 	const updateEditorFont = (editorId, updatedFont) => {
@@ -167,6 +182,7 @@ export function AppProvider({ children }) {
 				updateUiState,
 				updateEditorState,
 				updateEditorFont,
+				updateColorValue,
 				fontCategories,
 			}}
 		>

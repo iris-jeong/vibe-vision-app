@@ -16,7 +16,10 @@ export default function TextEditor({ editor }) {
 		lock: null,
 		palette: null,
 	};
-	const fontHasGoodContrast = hasGoodContrast(colors.background, "#1c1c1c");
+	const fontHasGoodContrast = hasGoodContrast(
+		colors.background.value,
+		"#1c1c1c"
+	);
 
 	const toggleEditorVisibility = (status) => {
 		setEditorIsHovered(status);

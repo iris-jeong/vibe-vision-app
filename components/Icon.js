@@ -22,7 +22,10 @@ export default function Icon({
 		font: "font",
 		download: "download",
 	};
-	const iconHasGoodContrast = hasGoodContrast(colors.background, "#1c1c1c");
+	const iconHasGoodContrast = hasGoodContrast(
+		colors.background.value,
+		"#1c1c1c"
+	);
 
 	const srcPath = isHovered
 		? iconHasGoodContrast

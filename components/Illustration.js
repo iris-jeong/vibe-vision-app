@@ -7,14 +7,15 @@ import Image from "next/image";
 
 export default function Illustration() {
 	const { colors } = useContext(AppContext);
+	const { primary, secondary, accent1, accent2, background } = colors;
 
-	const screenBackground = colors.secondary;
-	const sunBackground = colors.primary;
-	const sunFace = generateShade(hexToRgba(colors.primary, 1.0), "lighter");
-	const sunCheeks = colors.primary;
-	const colorBox1 = colors.primary;
-	const colorBox2 = colors.accent1;
-	const iconBackground = colors.accent2;
+	const screenBackground = secondary.value;
+	const sunBackground = primary.value;
+	const sunFace = generateShade(hexToRgba(primary.value, 1.0), "lighter");
+	const sunCheeks = primary.value;
+	const colorBox1 = primary.value;
+	const colorBox2 = accent1.value;
+	const iconBackground = accent2.value;
 	const borderColor = "#383838";
 	const bordersHasGoodContrast = hasGoodContrast(
 		screenBackground,
@@ -247,7 +248,7 @@ export default function Illustration() {
 									? "circle"
 									: "circle-light"
 							} extras-circle1`}
-							style={{ backgroundColor: colors.primary }}
+							style={{ backgroundColor: primary.value }}
 						></div>
 						<div
 							className={`${
@@ -255,7 +256,7 @@ export default function Illustration() {
 									? "circle"
 									: "circle-light"
 							} extras-circle2`}
-							style={{ backgroundColor: colors.accent1 }}
+							style={{ backgroundColor: accent1.value }}
 						></div>
 						<div
 							className={`${
@@ -263,7 +264,7 @@ export default function Illustration() {
 									? "circle"
 									: "circle-light"
 							} extras-circle3`}
-							style={{ backgroundColor: colors.secondary }}
+							style={{ backgroundColor: secondary.value }}
 						></div>
 					</div>
 					{/* .extras */}

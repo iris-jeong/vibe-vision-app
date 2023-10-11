@@ -8,8 +8,11 @@ export default function CircleColor({ color, showEditor, circleColorRef }) {
 	const lighterColor = generateShade(color, "lighter");
 	const darkerColor = generateShade(color, "darker");
 	const textHasGoodContrast = hasGoodContrast(color, "#1c1c1c");
-	const circleHasGoodContrast = hasGoodContrast(colors.background, color);
-	console.log("circle has good contrast??", circleHasGoodContrast);
+	const circleHasGoodContrast = hasGoodContrast(
+		colors.background.value,
+		color
+	);
+
 	return (
 		<div
 			ref={circleColorRef}

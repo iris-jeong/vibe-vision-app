@@ -6,7 +6,7 @@ import { hexToRgba } from "@utils/functions";
 
 export default function Header() {
 	const { colors } = useContext(AppContext);
-	const backgroundColor = hexToRgba(colors.background, 0.9);
+	const backgroundColor = hexToRgba(colors.background.value, 0.9);
 	const headerRef = useRef(null);
 	let prevScrollPos = useRef(window.pageYOffset);
 

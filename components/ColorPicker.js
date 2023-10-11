@@ -11,7 +11,7 @@ export default function ColorPicker({ iconRefs, color, colorIndex, setColor }) {
 			const keys = Object.keys(colors);
 
 			const updatedColors = { ...colors };
-			updatedColors[keys[colorIndex]] = color.hex;
+			updatedColors[keys[colorIndex]].value = color.hex;
 
 			updateEditorState({ colors: updatedColors });
 		},

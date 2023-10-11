@@ -14,7 +14,7 @@ const DynamicFontList = dynamic(() => import("@components/FontList"), {
 
 export default function Home() {
 	const { colors, editors } = useContext(AppContext);
-	const backgroundColor = colors.background;
+	const backgroundColor = colors.background.value;
 
 	useEffect(() => {
 		document.querySelector("body").style.backgroundColor = backgroundColor;
@@ -34,7 +34,7 @@ export default function Home() {
 							<Circle
 								key={index}
 								colorIndex={index}
-								color={color}
+								color={color.value}
 							/>
 						);
 					})}

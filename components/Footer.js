@@ -4,7 +4,7 @@ import { AppContext } from "@components/AppContext";
 
 export default function Footer() {
 	const { colors } = useContext(AppContext);
-	const backgroundColor = colors.background;
+	const backgroundColor = colors.background.value;
 	return (
 		<footer
 			style={{ backgroundColor: backgroundColor }}

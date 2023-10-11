@@ -7,9 +7,13 @@ export default function TextInput({ editor }) {
 	const textAreaRef = useRef(null);
 	const textAreaContainerRef = useRef(null);
 	const { colors } = useContext(AppContext);
+
 	const { content, fontFamily, fontSize, fontWeight, lineHeight } = editor;
-	const backgroundColor = colors.background;
-	const fontHasGoodContrast = hasGoodContrast(colors.background, "#1c1c1c");
+	const backgroundColor = colors.background.value;
+	const fontHasGoodContrast = hasGoodContrast(
+		colors.background.value,
+		"#1c1c1c"
+	);
 
 	const autoResize = () => {
 		const textArea = textAreaRef.current;
