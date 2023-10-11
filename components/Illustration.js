@@ -8,55 +8,117 @@ import Image from "next/image";
 export default function Illustration() {
 	const { colors } = useContext(AppContext);
 
-	const sunRectangleCircle = colors.primary;
-	const screenCircle = colors.secondary;
-	const rectangle = colors.accent1;
-	const iconsCircle = colors.accent2;
-	const sunOutline = generateShade(hexToRgba(colors.primary, 1.0), "lighter");
+	const screenBackground = colors.secondary;
+	const sunBackground = colors.primary;
+	const sunFace = generateShade(hexToRgba(colors.primary, 1.0), "lighter");
+	const sunCheeks = colors.primary;
+	const colorBox1 = colors.primary;
+	const colorBox2 = colors.accent1;
+	const iconBackground = colors.accent2;
+	const borderColor = "#383838";
+	const bordersHasGoodContrast = hasGoodContrast(
+		screenBackground,
+		borderColor
+	);
+	const sunBackgroundHasGoodContrast = hasGoodContrast(
+		sunBackground,
+		borderColor,
+		2
+	);
+	const sunHasGoodContrast = hasGoodContrast(sunFace, borderColor, 2.4);
+	const iconContentHasGoodContrast = hasGoodContrast(
+		iconBackground,
+		borderColor
+	);
 
 	return (
 		<aside className="w-full px-6 md:px-0">
-			<div className="header" style={{ backgroundColor: screenCircle }}>
-				<div className="header-buttons button1"></div>
-				<div className="header-buttons button2"></div>
-				<div className="header-buttons button3"></div>
+			<div
+				className={`header border border-2`}
+				style={{
+					backgroundColor: screenBackground,
+					borderColor: bordersHasGoodContrast ? "#383838" : "#ffffff",
+				}}
+			>
+				<div
+					className={`header-buttons button1 border border-2`}
+					style={{
+						borderColor: bordersHasGoodContrast
+							? "#383838"
+							: "#bebebe",
+					}}
+				></div>
+				<div
+					className={`header-buttons button2 border border-2`}
+					style={{
+						borderColor: bordersHasGoodContrast
+							? "#383838"
+							: "#bebebe",
+					}}
+				></div>
+				<div
+					className={`header-buttons button3 border border-2`}
+					style={{
+						borderColor: bordersHasGoodContrast
+							? "#383838"
+							: "#bebebe",
+					}}
+				></div>
 			</div>
-			<div className="screen" style={{ backgroundColor: screenCircle }}>
+			<div
+				className={`screen border border-2 border-[${
+					bordersHasGoodContrast ? "#383838" : "#ffffff"
+				}]`}
+				style={{ backgroundColor: screenBackground }}
+			>
 				{/* <div className="sun">
 					<div
-						className="sun-outline"
-						style={{ backgroundColor: sunRectangleCircle }}
+						className={`sun-outline border border-2`}
+						style={{
+							backgroundColor: sunBackground,
+							borderColor: sunBackgroundHasGoodContrast
+								? "#383838"
+								: "#ffffff",
+						}}
 					>
 						<div
-							className="sun-circle"
-							style={{ backgroundColor: sunOutline }}
+							className={`sun-circle border border-2`}
+							style={{
+								backgroundColor: sunFace,
+								borderColor: sunBackgroundHasGoodContrast
+									? "#383838"
+									: "#ffffff",
+							}}
 						></div>
 						<div
 							className={
-								hasGoodContrast(sunOutline, "#000000")
-									? "eyes"
-									: "eyes-light"
+								sunHasGoodContrast ? "eyes" : "eyes-light"
 							}
 						></div>
 						<div
 							className="cheeks"
 							style={{
-								backgroundColor: sunRectangleCircle,
-								boxShadow: `22px 0px 0px ${sunRectangleCircle}`,
+								backgroundColor: sunCheeks,
+								boxShadow: `22px 0px 0px ${sunCheeks}`,
 							}}
 						></div>
 						<div
 							className={
-								hasGoodContrast(sunOutline, "#000000")
-									? "smile"
-									: "smile-light"
+								sunHasGoodContrast ? "smile" : "smile-light"
 							}
 						></div>
 					</div>
 				</div> */}
 				{/* .sun */}
 
-				<div className="inner-screen">
+				<div
+					className={`inner-screen border border-2`}
+					style={{
+						borderColor: bordersHasGoodContrast
+							? "#383838"
+							: "#c0c0c0",
+					}}
+				>
 					<div className="textbox">
 						<div className="textbox-circle circle1"></div>
 						<div className="textbox-circle circle2"></div>
@@ -70,26 +132,39 @@ export default function Illustration() {
 				<div className="panel">
 					<div className="colorboxes">
 						<div
-							className="colorbox colorbox1"
-							style={{ backgroundColor: sunRectangleCircle }}
+							className={`colorbox colorbox1 border border-2`}
+							style={{
+								backgroundColor: colorBox1,
+								borderColor: bordersHasGoodContrast
+									? "#383838"
+									: "#ffffff",
+							}}
 						></div>
 						<div
-							className="colorbox colorbox2"
-							style={{ backgroundColor: rectangle }}
+							className={`colorbox colorbox2 border border-2`}
+							style={{
+								backgroundColor: colorBox2,
+								borderColor: bordersHasGoodContrast
+									? "#383838"
+									: "#ffffff",
+							}}
 						></div>
 					</div>
 					{/* .colorboxes */}
 
 					<div className="text-editor">
 						<div
-							className="icon-container border border-[#383838] border-2"
-							style={{ backgroundColor: iconsCircle }}
+							className={`icon-container border border-2`}
+							style={{
+								backgroundColor: iconBackground,
+								borderColor: bordersHasGoodContrast
+									? "#383838"
+									: "#ffffff",
+							}}
 						>
 							<Image
 								src={`icons/font${
-									hasGoodContrast(iconsCircle, "#383838", 2.7)
-										? ""
-										: "-white"
+									iconContentHasGoodContrast ? "" : "-white"
 								}.svg`}
 								alt="Font icon"
 								width={24}
@@ -97,17 +172,18 @@ export default function Illustration() {
 							/>
 						</div>
 						<div
-							className="icon-container border border-[#383838] border-2"
-							style={{ backgroundColor: iconsCircle }}
+							className={`icon-container border border-2`}
+							style={{
+								backgroundColor: iconBackground,
+								borderColor: bordersHasGoodContrast
+									? "#383838"
+									: "#ffffff",
+							}}
 						>
 							<div className="icon">
 								<Image
 									src={`icons/align-left${
-										hasGoodContrast(
-											iconsCircle,
-											"#383838",
-											2.7
-										)
+										iconContentHasGoodContrast
 											? ""
 											: "-white"
 									}.svg`}
@@ -118,17 +194,18 @@ export default function Illustration() {
 							</div>
 						</div>
 						<div
-							className="icon-container border border-[#383838] border-2"
-							style={{ backgroundColor: iconsCircle }}
+							className={`icon-container border border-2`}
+							style={{
+								backgroundColor: iconBackground,
+								borderColor: bordersHasGoodContrast
+									? "#383838"
+									: "#ffffff",
+							}}
 						>
 							<div className="icon">
 								<Image
 									src={`icons/align-center${
-										hasGoodContrast(
-											iconsCircle,
-											"#383838",
-											2.7
-										)
+										iconContentHasGoodContrast
 											? ""
 											: "-white"
 									}.svg`}
@@ -139,17 +216,18 @@ export default function Illustration() {
 							</div>
 						</div>
 						<div
-							className="icon-container border border-[#383838] border-2"
-							style={{ backgroundColor: iconsCircle }}
+							className={`icon-container border border-2`}
+							style={{
+								backgroundColor: iconBackground,
+								borderColor: bordersHasGoodContrast
+									? "#383838"
+									: "#ffffff",
+							}}
 						>
 							<div className="icon">
 								<Image
 									src={`icons/align-right${
-										hasGoodContrast(
-											iconsCircle,
-											"#383838",
-											2.7
-										)
+										iconContentHasGoodContrast
 											? ""
 											: "-white"
 									}.svg`}
@@ -165,39 +243,27 @@ export default function Illustration() {
 					<div className="extras">
 						<div
 							className={`${
-								hasGoodContrast(
-									sunRectangleCircle,
-									"#383838",
-									2.9
-								)
+								bordersHasGoodContrast
 									? "circle"
 									: "circle-light"
 							} extras-circle1`}
-							style={{ backgroundColor: sunRectangleCircle }}
+							style={{ backgroundColor: colors.primary }}
 						></div>
 						<div
 							className={`${
-								hasGoodContrast(
-									sunRectangleCircle,
-									"#383838",
-									2.9
-								)
+								bordersHasGoodContrast
 									? "circle"
 									: "circle-light"
 							} extras-circle2`}
-							style={{ backgroundColor: iconsCircle }}
+							style={{ backgroundColor: colors.accent1 }}
 						></div>
 						<div
 							className={`${
-								hasGoodContrast(
-									sunRectangleCircle,
-									"#383838",
-									2.9
-								)
+								bordersHasGoodContrast
 									? "circle"
 									: "circle-light"
 							} extras-circle3`}
-							style={{ backgroundColor: screenCircle }}
+							style={{ backgroundColor: colors.secondary }}
 						></div>
 					</div>
 					{/* .extras */}

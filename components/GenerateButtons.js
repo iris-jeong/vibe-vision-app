@@ -33,6 +33,14 @@ export default function GenerateButtons() {
 		updateEditorState({ editors: updatedEditors });
 	};
 
+	const buttonHasGoodContrast = hasGoodContrast(
+		colors.primary,
+		"#383838",
+		4.5,
+		1,
+		4
+	);
+	console.log("button has good contrast????", buttonHasGoodContrast);
 	return (
 		<>
 			{["Colors", "Fonts"].map((button) => {
@@ -42,14 +50,14 @@ export default function GenerateButtons() {
 						type={button}
 						style={{
 							backgroundColor: colors.primary,
-							color: hasGoodContrast(colors.primary, "#ffffff")
-								? "#ffffff"
-								: "#383838",
+							color: buttonHasGoodContrast
+								? "#383838"
+								: "#ffffff",
 						}}
 						src={
-							hasGoodContrast(colors.primary, "#ffffff")
-								? "icons/swap-white.svg"
-								: "icons/swap.svg"
+							buttonHasGoodContrast
+								? "icons/swap.svg"
+								: "icons/swap-white.svg"
 						}
 						alt={`Swap ${button}`}
 						onClick={

@@ -3,9 +3,10 @@ import { useState, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import IconButton from "./IconButton";
 import RangeSlider from "./RangeSlider";
+import { hasGoodContrast } from "@utils/generatePalette";
 
 export default function TextEditor({ editor }) {
-	const { updateEditorState, updateUiState, isFontListShown } =
+	const { colors, updateEditorState, updateUiState, isFontListShown } =
 		useContext(AppContext);
 
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
@@ -15,6 +16,7 @@ export default function TextEditor({ editor }) {
 		lock: null,
 		palette: null,
 	};
+	const fontHasGoodContrast = hasGoodContrast(colors.background, "#1c1c1c");
 
 	const toggleEditorVisibility = (status) => {
 		setEditorIsHovered(status);
@@ -50,7 +52,10 @@ export default function TextEditor({ editor }) {
 			onMouseEnter={() => toggleEditorVisibility(true)}
 			onMouseLeave={() => toggleEditorVisibility(false)}
 		>
-			<div className="blue__container text-sm w-fit pl-3">
+			<div
+				className="blue__container text-sm w-fit pl-3"
+				style={{ color: fontHasGoodContrast ? "#1c1c1c" : "#ffffff" }}
+			>
 				{editor.fontFamily}
 			</div>
 			<div

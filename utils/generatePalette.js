@@ -37,7 +37,7 @@ function generateMonochromaticPalette() {
 		const lightness = l - 20 + i * 10;
 		colors.push(hslToHex(h, s, Math.max(0, Math.min(100, lightness))));
 	}
-	console.log("monochromatic", colors);
+	// console.log("monochromatic", colors);
 	return colors;
 }
 
@@ -57,7 +57,7 @@ function generateAnalogousPalette() {
 		let currentHue = (baseH + i * step) % 360;
 		colors.push(hslToHex(currentHue, 100, 50));
 	}
-	console.log("analogous", colors);
+	// console.log("analogous", colors);
 
 	return colors;
 }
@@ -95,7 +95,7 @@ function generateComplementaryPalette() {
 	colors.push(complementary);
 	colors.push(complementaryLighter);
 
-	console.log("complementary", colors);
+	// console.log("complementary", colors);
 
 	return colors;
 }
@@ -118,7 +118,7 @@ function generateTriadicPalette() {
 		colors.push(hslToHex(currentHue, 100, 50));
 		colors.push(hslToHex(currentHue, 100, 20));
 	}
-	console.log("triadic", colors);
+	// console.log("triadic", colors);
 
 	return colors;
 }
@@ -148,11 +148,34 @@ function getContrastRatio(color1, color2) {
 
 // Function to check if the contrast is acceptable.
 // Minimum contrast of 4.5 is commonly used for normal text.
-export function hasGoodContrast(color1, color2, minimumContrast = 3.3) {
+export function hasGoodContrast(
+	color1,
+	color2,
+	minimumContrast = 4.5,
+	exceptionalLuminance = 0.2,
+	exceptionalMinimumContrast = 1
+) {
 	const rgb1 = hexToRgb(color1);
 	const rgb2 = hexToRgb(color2);
-	// console.log(getContrastRatio(rgb1, rgb2), ">=", minimumContrast, "?");
-	return getContrastRatio(rgb1, rgb2) >= minimumContrast;
+
+	const lum1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+	const lum2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+	const contrastRatio = getContrastRatio(rgb1, rgb2);
+
+	// console.log("Calculated contrast ratio:", contrastRatio);
+
+	// Check if the colors has exceptional luminance, lower minimum contrast requirement.
+	if (lum1 > exceptionalLuminance) {
+		// console.log("color", color1);
+		// console.log("lum1: ", lum1);
+		// console.log(
+		// 	"Exceptional luminance found. Lowering minimum contrast requirement.",
+		// 	exceptionalLuminance
+		// );
+		return contrastRatio >= exceptionalMinimumContrast;
+	}
+
+	return contrastRatio >= minimumContrast;
 }
 
 /*

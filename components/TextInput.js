@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { AppContext } from "@components/AppContext";
 import { loadFont } from "@utils/functions";
+import { hasGoodContrast } from "@utils/generatePalette";
 
 export default function TextInput({ editor }) {
 	const textAreaRef = useRef(null);
@@ -8,6 +9,7 @@ export default function TextInput({ editor }) {
 	const { colors } = useContext(AppContext);
 	const { content, fontFamily, fontSize, fontWeight, lineHeight } = editor;
 	const backgroundColor = colors.background;
+	const fontHasGoodContrast = hasGoodContrast(colors.background, "#1c1c1c");
 
 	const autoResize = () => {
 		const textArea = textAreaRef.current;
@@ -50,6 +52,7 @@ export default function TextInput({ editor }) {
 			<textarea
 				ref={textAreaRef}
 				style={{
+					color: fontHasGoodContrast ? "#1c1c1c" : "#ffffff",
 					backgroundColor: backgroundColor,
 					fontSize: fontSize,
 					fontWeight: fontWeight,

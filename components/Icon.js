@@ -1,5 +1,8 @@
 import Image from "next/image";
 import ColorPicker from "./ColorPicker";
+import { useContext } from "react";
+import { AppContext } from "@components/AppContext";
+import { hasGoodContrast } from "@utils/generatePalette";
 
 export default function Icon({
 	type,
@@ -11,6 +14,7 @@ export default function Icon({
 	colorIndex,
 	setColor,
 }) {
+	const { colors } = useContext(AppContext);
 	const icons = {
 		lock: isLocked ? "locked" : "unlocked",
 		copy: "copy",
@@ -18,10 +22,15 @@ export default function Icon({
 		font: "font",
 		download: "download",
 	};
+	const iconHasGoodContrast = hasGoodContrast(colors.background, "#1c1c1c");
 
 	const srcPath = isHovered
-		? `icons/${icons[type]}-hover.svg`
-		: `icons/${icons[type]}.svg`;
+		? iconHasGoodContrast
+			? `icons/${icons[type]}-hover.svg`
+			: `icons/${icons[type]}-white-hover.svg`
+		: iconHasGoodContrast
+		? `icons/${icons[type]}.svg`
+		: `icons/${icons[type]}-white.svg`;
 
 	return (
 		<>
