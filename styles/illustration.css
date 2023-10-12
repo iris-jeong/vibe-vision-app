@@ -161,7 +161,7 @@ aside {
 	height: clamp(14px, 1vw, 20px);
 	width: clamp(14px, 1vw, 20px);
 	border-radius: 50%;
-	border: 2px solid #383838;
+	/* border: 2px solid #383838; */
 	margin-bottom: 8px;
 }
 .circle-light {
@@ -169,7 +169,7 @@ aside {
 	height: clamp(14px, 1vw, 20px);
 	width: clamp(14px, 1vw, 20px);
 	border-radius: 50%;
-	border: 2px solid #ffffff;
+	/* border: 2px solid #ffffff; */
 	margin-bottom: 8px;
 }
 .circle::after {
@@ -251,9 +251,9 @@ aside {
 	top: 35%;
 	left: 37%;
 	border-radius: 50%;
-	background-color: #383838;
+	/* background-color: #383838; */
 	z-index: 2;
-	box-shadow: 18px 0px 0px #383833;
+	/* box-shadow: 18px 0px 0px #383833; */
 }
 .eyes-light {
 	position: absolute;
@@ -263,9 +263,9 @@ aside {
 	top: 35%;
 	left: 37%;
 	border-radius: 50%;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	z-index: 2;
-	box-shadow: 18px 0px 0px #ffffff;
+	/* box-shadow: 18px 0px 0px #ffffff; */
 }
 .cheeks {
 	position: absolute;
@@ -284,7 +284,7 @@ aside {
 	left: 39%;
 	border-radius: 50%;
 	background: transparent;
-	border-bottom: 3px solid #383833;
+	/* border-bottom: 3px solid #383833; */
 	z-index: 2;
 }
 .smile-light {
@@ -295,6 +295,6 @@ aside {
 	left: 39%;
 	border-radius: 50%;
 	background: transparent;
-	border-bottom: 3px solid #ffffff;
+	/* border-bottom: 3px solid #ffffff; */
 	z-index: 2;
 }

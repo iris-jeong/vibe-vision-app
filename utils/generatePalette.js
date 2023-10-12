@@ -1,4 +1,5 @@
-export function generateColorPalette() {
+export function generateColorPalette(prevColors) {
+	console.log(prevColors);
 	const generators = [
 		generateMonochromaticPalette,
 		generateAnalogousPalette,
@@ -18,7 +19,16 @@ export function generateColorPalette() {
 	// Replace the last color with the lighter shade.
 	colors.pop();
 	colors.push(lighterHex);
+	console.log("colors before: ", colors);
 
+	// If there are locked colors, put them in the returning colors array.
+	Object.keys(prevColors).map((key, i) => {
+		console.log("prevColors[key]: ", prevColors[key]);
+		if (prevColors[key].locked) {
+			colors[i] = prevColors[key].value;
+		}
+	});
+	console.log("colors after: ", colors);
 	return colors;
 }
 

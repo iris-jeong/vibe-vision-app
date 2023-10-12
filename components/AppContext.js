@@ -31,7 +31,7 @@ export function AppProvider({ children }) {
 				fontFamily: "IBM Plex Sans",
 				fontSize: "46px",
 				fontWeight: "700",
-				lineHeight: "normal",
+				lineHeight: "110%",
 				locked: false,
 			},
 			{
@@ -67,6 +67,22 @@ export function AppProvider({ children }) {
 			...prevState,
 			...updatedProperties,
 		}));
+	};
+
+	const updateColorLockState = (colorKey) => {
+		console.log("updating color lock state");
+		console.log("color key", colorKey);
+		setEditorState((prevState) => {
+			const updatedColors = { ...prevState.colors };
+
+			if (updatedColors[colorKey]) {
+				updatedColors[colorKey].locked =
+					!updatedColors[colorKey].locked;
+			}
+
+			return { ...prevState, colors: updatedColors };
+		});
+		console.log(editorState.colors);
 	};
 
 	const updateColorValue = (colorKey, newColorValue) => {
@@ -183,6 +199,7 @@ export function AppProvider({ children }) {
 				updateEditorState,
 				updateEditorFont,
 				updateColorValue,
+				updateColorLockState,
 				fontCategories,
 			}}
 		>

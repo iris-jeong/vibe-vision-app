@@ -12,7 +12,7 @@ export function hexToRgba(hex, opacity) {
 export function generateShade(hexColor, shade) {
 	let color;
 	if (shade === "lighter") {
-		color = chroma(hexColor).brighten(0.8).hex();
+		color = chroma(hexColor).brighten(1.2).hex();
 	} else {
 		color = chroma(hexColor).darken(0.5).hex();
 	}

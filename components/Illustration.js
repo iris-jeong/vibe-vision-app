@@ -8,11 +8,24 @@ import Image from "next/image";
 export default function Illustration() {
 	const { colors } = useContext(AppContext);
 	const { primary, secondary, accent1, accent2, background } = colors;
-
 	const screenBackground = secondary.value;
 	const sunBackground = primary.value;
+	const darkerPrimary = generateShade(
+		hexToRgba(primary.value, 1.0),
+		"darker"
+	);
+	const darkestPrimary = generateShade(
+		hexToRgba(darkerPrimary, 1.0),
+		"darker"
+	);
+	const darkestPrimaryRgba = hexToRgba(darkestPrimary, 1.0);
+
 	const sunFace = generateShade(hexToRgba(primary.value, 1.0), "lighter");
 	const sunCheeks = primary.value;
+	const sunCheeksDarker = generateShade(
+		hexToRgba(primary.value, 1.0),
+		"darker"
+	);
 	const colorBox1 = primary.value;
 	const colorBox2 = accent1.value;
 	const iconBackground = accent2.value;
@@ -38,7 +51,9 @@ export default function Illustration() {
 				className={`header border border-2`}
 				style={{
 					backgroundColor: screenBackground,
-					borderColor: bordersHasGoodContrast ? "#383838" : "#ffffff",
+					borderColor: bordersHasGoodContrast
+						? "#383838"
+						: darkerPrimary,
 				}}
 			>
 				<div
@@ -46,7 +61,7 @@ export default function Illustration() {
 					style={{
 						borderColor: bordersHasGoodContrast
 							? "#383838"
-							: "#bebebe",
+							: darkerPrimary,
 					}}
 				></div>
 				<div
@@ -54,7 +69,7 @@ export default function Illustration() {
 					style={{
 						borderColor: bordersHasGoodContrast
 							? "#383838"
-							: "#bebebe",
+							: darkerPrimary,
 					}}
 				></div>
 				<div
@@ -62,24 +77,27 @@ export default function Illustration() {
 					style={{
 						borderColor: bordersHasGoodContrast
 							? "#383838"
-							: "#bebebe",
+							: darkerPrimary,
 					}}
 				></div>
 			</div>
 			<div
-				className={`screen border border-2 border-[${
-					bordersHasGoodContrast ? "#383838" : "#ffffff"
-				}]`}
-				style={{ backgroundColor: screenBackground }}
+				className={`screen border border-2`}
+				style={{
+					backgroundColor: screenBackground,
+					borderColor: bordersHasGoodContrast
+						? "#383838"
+						: darkerPrimary,
+				}}
 			>
-				{/* <div className="sun">
+				<div className="sun">
 					<div
 						className={`sun-outline border border-2`}
 						style={{
 							backgroundColor: sunBackground,
 							borderColor: sunBackgroundHasGoodContrast
 								? "#383838"
-								: "#ffffff",
+								: darkerPrimary,
 						}}
 					>
 						<div
@@ -88,28 +106,46 @@ export default function Illustration() {
 								backgroundColor: sunFace,
 								borderColor: sunBackgroundHasGoodContrast
 									? "#383838"
-									: "#ffffff",
+									: darkerPrimary,
 							}}
 						></div>
 						<div
-							className={
-								sunHasGoodContrast ? "eyes" : "eyes-light"
-							}
+							className="eyes"
+							style={{
+								backgroundColor: sunBackgroundHasGoodContrast
+									? "#383838"
+									: darkestPrimaryRgba,
+								borderColor: sunBackgroundHasGoodContrast
+									? "#383838"
+									: darkerPrimary,
+								boxShadow: sunBackgroundHasGoodContrast
+									? "18px 0 0 0 rgba(0,0,0,1)"
+									: `18px 0 0 0 ${darkestPrimaryRgba}`,
+							}}
 						></div>
 						<div
 							className="cheeks"
 							style={{
-								backgroundColor: sunCheeks,
-								boxShadow: `22px 0px 0px ${sunCheeks}`,
+								backgroundColor: sunBackgroundHasGoodContrast
+									? sunCheeks
+									: sunCheeksDarker,
+								boxShadow: sunBackgroundHasGoodContrast
+									? `22px 0px 0px ${sunCheeks}`
+									: `22px 0px 0px ${sunCheeksDarker}`,
 							}}
 						></div>
 						<div
 							className={
 								sunHasGoodContrast ? "smile" : "smile-light"
 							}
+							style={{
+								borderBottom: sunHasGoodContrast
+									? "3px solid #383833"
+									: `3px solid ${darkestPrimary}`,
+							}}
 						></div>
 					</div>
-				</div> */}
+				</div>
 				{/* .sun */}
 
 				<div
@@ -117,7 +153,7 @@ export default function Illustration() {
 					style={{
 						borderColor: bordersHasGoodContrast
 							? "#383838"
-							: "#c0c0c0",
+							: darkerPrimary,
 					}}
 				>
 					<div className="textbox">
@@ -138,7 +174,7 @@ export default function Illustration() {
 								backgroundColor: colorBox1,
 								borderColor: bordersHasGoodContrast
 									? "#383838"
-									: "#ffffff",
+									: darkerPrimary,
 							}}
 						></div>
 						<div
@@ -147,7 +183,7 @@ export default function Illustration() {
 								backgroundColor: colorBox2,
 								borderColor: bordersHasGoodContrast
 									? "#383838"
-									: "#ffffff",
+									: darkerPrimary,
 							}}
 						></div>
 					</div>
@@ -160,7 +196,7 @@ export default function Illustration() {
 								backgroundColor: iconBackground,
 								borderColor: bordersHasGoodContrast
 									? "#383838"
-									: "#ffffff",
+									: darkerPrimary,
 							}}
 						>
 							<Image
@@ -178,7 +214,7 @@ export default function Illustration() {
 								backgroundColor: iconBackground,
 								borderColor: bordersHasGoodContrast
 									? "#383838"
-									: "#ffffff",
+									: darkerPrimary,
 							}}
 						>
 							<div className="icon">
@@ -200,7 +236,7 @@ export default function Illustration() {
 								backgroundColor: iconBackground,
 								borderColor: bordersHasGoodContrast
 									? "#383838"
-									: "#ffffff",
+									: darkerPrimary,
 							}}
 						>
 							<div className="icon">
@@ -222,7 +258,7 @@ export default function Illustration() {
 								backgroundColor: iconBackground,
 								borderColor: bordersHasGoodContrast
 									? "#383838"
-									: "#ffffff",
+									: darkerPrimary,
 							}}
 						>
 							<div className="icon">
@@ -243,28 +279,43 @@ export default function Illustration() {
 
 					<div className="extras">
 						<div
-							className={`${
+							className={`border-2 ${
 								bordersHasGoodContrast
 									? "circle"
 									: "circle-light"
 							} extras-circle1`}
-							style={{ backgroundColor: primary.value }}
+							style={{
+								backgroundColor: primary.value,
+								borderColor: bordersHasGoodContrast
+									? borderColor
+									: darkerPrimary,
+							}}
 						></div>
 						<div
-							className={`${
+							className={`border-2 ${
 								bordersHasGoodContrast
 									? "circle"
 									: "circle-light"
 							} extras-circle2`}
-							style={{ backgroundColor: accent1.value }}
+							style={{
+								backgroundColor: accent1.value,
+								borderColor: bordersHasGoodContrast
+									? borderColor
+									: darkerPrimary,
+							}}
 						></div>
 						<div
-							className={`${
+							className={`border-2 ${
 								bordersHasGoodContrast
 									? "circle"
 									: "circle-light"
 							} extras-circle3`}
-							style={{ backgroundColor: secondary.value }}
+							style={{
+								backgroundColor: background.value,
+								borderColor: bordersHasGoodContrast
+									? borderColor
+									: darkerPrimary,
+							}}
 						></div>
 					</div>
 					{/* .extras */}

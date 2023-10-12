@@ -5,12 +5,14 @@ import IconButton from "./IconButton";
 export default function CircleEditor({
 	color,
 	colorIndex,
+	colorKey,
 	setColor,
 	showEditor,
 	setShowEditor,
 	circleColorRef,
 }) {
-	const { updateUiState, uiState, isPaletteOpen } = useContext(AppContext);
+	const { updateColorLockState, updateUiState, uiState, isPaletteOpen } =
+		useContext(AppContext);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
 	const [isLocked, setIsLocked] = useState(false);
 	const sketchPickerRef = useRef(null);
@@ -71,9 +73,10 @@ export default function CircleEditor({
 		switch (type) {
 			case "lock":
 				setIsLocked((prevState) => !prevState);
+				updateColorLockState(colorKey);
 				break;
 			case "copy":
-				copyToClipboard(color);
+				copyToClipboard(color.value);
 				displayNotification(type, "color");
 				break;
 			case "palette":

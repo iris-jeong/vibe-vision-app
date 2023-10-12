@@ -16,7 +16,7 @@ export default function GenerateButtons() {
 
 	const generatePalette = () => {
 		//Generate a random color palette.
-		const palette = generateColorPalette();
+		const palette = generateColorPalette(colors);
 
 		//Update the app context colors.
 		Object.keys(colors).map((colorKey, i) => {

@@ -4,9 +4,9 @@ import { AppContext } from "@components/AppContext";
 import CircleEditor from "./CircleEditor";
 import CircleColor from "./CircleColor";
 
-export default function Circle({ color, colorIndex }) {
+export default function Circle({ color, colorIndex, colorKey }) {
 	const { isPaletteOpen } = useContext(AppContext);
-	const [circleColor, setCircleColor] = useState(color);
+	const [circleColor, setCircleColor] = useState(color.value);
 	const [showEditor, setShowEditor] = useState(false);
 	const circleColorRef = useRef(null);
 
@@ -18,8 +18,8 @@ export default function Circle({ color, colorIndex }) {
 	};
 
 	useEffect(() => {
-		setCircleColor(color);
-	}, [color]);
+		setCircleColor(color.value);
+	}, [color.value]);
 
 	return (
 		<div
@@ -37,8 +37,9 @@ export default function Circle({ color, colorIndex }) {
 				}`}
 			>
 				<CircleEditor
-					color={circleColor}
+					color={color}
 					colorIndex={colorIndex}
+					colorKey={colorKey}
 					setColor={setCircleColor}
 					showEditor={showEditor}
 					setShowEditor={setShowEditor}
@@ -47,7 +48,8 @@ export default function Circle({ color, colorIndex }) {
 			</div>
 			<CircleColor
 				circleColorRef={circleColorRef}
-				color={circleColor}
+				color={color}
+				colorKey={colorKey}
 				showEditor={showEditor}
 			/>
 		</div>
