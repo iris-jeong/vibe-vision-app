@@ -6,8 +6,13 @@ import RangeSlider from "./RangeSlider";
 import { hasGoodContrast } from "@utils/generatePalette";
 
 export default function TextEditor({ editor }) {
-	const { colors, updateEditorState, updateUiState, isFontListShown } =
-		useContext(AppContext);
+	const {
+		colors,
+		updateFontLockState,
+		updateEditorState,
+		updateUiState,
+		isFontListShown,
+	} = useContext(AppContext);
 
 	const [editorIsHovered, setEditorIsHovered] = useState(false);
 	const [hoveredIcon, setHoveredIcon] = useState(null);
@@ -36,6 +41,7 @@ export default function TextEditor({ editor }) {
 		switch (type) {
 			case "lock":
 				setIsLocked((prevState) => !prevState);
+				updateFontLockState(editor.id);
 				break;
 			case "font":
 				updateEditorState({ activeEditor: editor.id });

@@ -70,8 +70,6 @@ export function AppProvider({ children }) {
 	};
 
 	const updateColorLockState = (colorKey) => {
-		console.log("updating color lock state");
-		console.log("color key", colorKey);
 		setEditorState((prevState) => {
 			const updatedColors = { ...prevState.colors };
 
@@ -82,7 +80,21 @@ export function AppProvider({ children }) {
 
 			return { ...prevState, colors: updatedColors };
 		});
-		console.log(editorState.colors);
+	};
+
+	const updateFontLockState = (editorId) => {
+		setEditorState((prevState) => {
+			console.log("prevState", prevState);
+			const updatedEditors = prevState.editors.map((editor) => {
+				if (editor.id === editorId) {
+					return { ...editor, locked: !editor.locked };
+				}
+				return editor;
+			});
+			console.log("updatedEditors: ", updatedEditors);
+
+			return { ...prevState, editors: updatedEditors };
+		});
 	};
 
 	const updateColorValue = (colorKey, newColorValue) => {
@@ -200,6 +212,7 @@ export function AppProvider({ children }) {
 				updateEditorFont,
 				updateColorValue,
 				updateColorLockState,
+				updateFontLockState,
 				fontCategories,
 			}}
 		>

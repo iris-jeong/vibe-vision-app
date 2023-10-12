@@ -25,13 +25,16 @@ export default function GenerateButtons() {
 	};
 
 	const generateFonts = () => {
+		console.log(editors);
 		//Generate a random font pairing.
-		const fontPair = generateFontPairing(fontCategories);
+		const fontPair = generateFontPairing(fontCategories, editors);
 
 		//Update the app context editor font families.
 		editors.forEach((editor, i) => {
-			updateEditorFont(editor.id, fontPair[i].family);
+			updateEditorFont(editor.id, fontPair[i]);
 		});
+
+		console.log(editors);
 	};
 
 	const buttonHasGoodContrast = hasGoodContrast(
