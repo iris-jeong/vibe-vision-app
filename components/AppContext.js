@@ -47,6 +47,15 @@ export function AppProvider({ children }) {
 			},
 		],
 	});
+	const [paletteHistory, setPaletteHistory] = useState([
+		{
+			primary: { value: "#8b6ce0", locked: false },
+			secondary: { value: "#e3f6f5", locked: false },
+			accent1: { value: "#bAe8e8", locked: false },
+			accent2: { value: "#ffd803", locked: false },
+			background: { value: "#faebd7", locked: false },
+		},
+	]);
 
 	const [uiState, setUiState] = useState({
 		isPaletteOpen: false,
@@ -91,7 +100,6 @@ export function AppProvider({ children }) {
 				}
 				return editor;
 			});
-			console.log("updatedEditors: ", updatedEditors);
 
 			return { ...prevState, editors: updatedEditors };
 		});
@@ -119,6 +127,18 @@ export function AppProvider({ children }) {
 			});
 			return { ...prevState, editors: updatedEditors };
 		});
+	};
+
+	const addNewPaletteToHistory = (palette) => {
+		console.log("palette history: ", paletteHistory);
+		const newPalette = {
+			primary: { value: palette[0], locked: false },
+			secondary: { value: palette[1], locked: false },
+			accent1: { value: palette[2], locked: false },
+			accent2: { value: palette[3], locked: false },
+			background: { value: palette[4], locked: false },
+		};
+		setPaletteHistory((prevHistory) => [...prevHistory, newPalette]);
 	};
 
 	useEffect(() => {
@@ -214,6 +234,7 @@ export function AppProvider({ children }) {
 				updateColorLockState,
 				updateFontLockState,
 				fontCategories,
+				addNewPaletteToHistory,
 			}}
 		>
 			{children}

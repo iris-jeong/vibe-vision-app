@@ -11,17 +11,22 @@ export default function GenerateButtons() {
 		updateColorValue,
 		updateEditorFont,
 		fontCategories,
+		addNewPaletteToHistory,
 	} = useContext(AppContext);
 	const { primary } = colors;
 
 	const generatePalette = () => {
 		//Generate a random color palette.
 		const palette = generateColorPalette(colors);
+		console.log("palette:", palette);
+		//Add palette to history.
+		addNewPaletteToHistory(palette);
 
 		//Update the app context colors.
 		Object.keys(colors).map((colorKey, i) => {
 			updateColorValue(colorKey, palette[i]);
 		});
+		// console.log("updatedcolors: ", updatedColors);
 	};
 
 	const generateFonts = () => {
