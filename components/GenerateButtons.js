@@ -12,13 +12,14 @@ export default function GenerateButtons() {
 		updateEditorFont,
 		fontCategories,
 		addNewPaletteToHistory,
+		addNewFontPairToHistory,
 	} = useContext(AppContext);
 	const { primary } = colors;
 
 	const generatePalette = () => {
 		//Generate a random color palette.
 		const palette = generateColorPalette(colors);
-		console.log("palette:", palette);
+
 		//Add palette to history.
 		addNewPaletteToHistory(palette);
 
@@ -33,6 +34,8 @@ export default function GenerateButtons() {
 		console.log(editors);
 		//Generate a random font pairing.
 		const fontPair = generateFontPairing(fontCategories, editors);
+
+		addNewFontPairToHistory(fontPair);
 
 		//Update the app context editor font families.
 		editors.forEach((editor, i) => {

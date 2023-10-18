@@ -56,6 +56,12 @@ export function AppProvider({ children }) {
 			background: { value: "#faebd7", locked: false },
 		},
 	]);
+	const [fontPairHistory, setFontPairHistory] = useState([
+		{
+			fontFamily1: "IBM Plex Sans",
+			fontFamily2: "Inter",
+		},
+	]);
 
 	const [uiState, setUiState] = useState({
 		isPaletteOpen: false,
@@ -130,7 +136,7 @@ export function AppProvider({ children }) {
 	};
 
 	const addNewPaletteToHistory = (palette) => {
-		console.log("palette history: ", paletteHistory);
+		// console.log("palette history: ", paletteHistory);
 		const newPalette = {
 			primary: { value: palette[0], locked: false },
 			secondary: { value: palette[1], locked: false },
@@ -139,6 +145,16 @@ export function AppProvider({ children }) {
 			background: { value: palette[4], locked: false },
 		};
 		setPaletteHistory((prevHistory) => [...prevHistory, newPalette]);
+	};
+
+	const addNewFontPairToHistory = (fontPair) => {
+		// console.log("font pair history: ", fontPairHistory);
+		const newFontPair = {
+			fontFamily1: fontPair[0],
+			fontFamily2: fontPair[1],
+		};
+
+		setFontPairHistory((prevHistory) => [...prevHistory, newFontPair]);
 	};
 
 	useEffect(() => {
@@ -175,10 +191,6 @@ export function AppProvider({ children }) {
 								.includes("material icons")
 					)
 					.map((item) => {
-						// const itemInfo = {
-						// 	category: item.category,
-						// 	family: item.family,
-						// };
 						switch (item.category) {
 							case "serif":
 								serifs.push(item);
@@ -235,6 +247,7 @@ export function AppProvider({ children }) {
 				updateFontLockState,
 				fontCategories,
 				addNewPaletteToHistory,
+				addNewFontPairToHistory,
 			}}
 		>
 			{children}
